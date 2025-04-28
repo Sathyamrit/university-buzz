@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const Club = () => {
+export const Clubs = () => {
   return (
     <div>Club</div>
   )
 }
 
-export default Club
+export default Clubs
