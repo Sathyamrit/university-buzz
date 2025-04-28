@@ -1,7 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
-import Profile from './models/profile.model.js'; //import the Profile model
+// import Profile from './models/profile.model.js'; //import the Profile model
+// import { profile } from 'console';
+import profileRoutes from './routes/profile.route.js'; //import the profile routes
 
 dotenv.config();
 
@@ -9,25 +11,17 @@ const app = express();
 
 app.use(express.json()); //middleware to parse JSON data from incoming requests
 
-app.post('/api/profiles', async (req, res) => {
-  const profile = req.body; //user will send the profile data in the body of the request
+app.use("/api/profiles", profileRoutes); //use the profileRoutes for all requests to /api/profiles
 
-  if(!profile.name || !profile.email) {
-    return res.status(400).json({ success:false,  message: 'Name and email are required' });
-    // return res.status(400).json({ message: 'Profile data is required' });
-  }
 
-  const newProfile = new Profile(profile); //create a new profile object using the Profile model
+// app.post('/', async (req, res) => {
+//   const profile = req.body; //user will send the profile data in the body of the request
 
-  try {
-    await newProfile.save(); //save the profile to the database
-    res.status(201).json({ success: true, message: 'Profile created successfully', data: newProfile });
-  }
-  catch (error) {
-    console.error("Error in Create Profile", error.message); //log the error message to the console
-    res.status(500).json({ success: false, message: 'Server error', error: error.message });
-  }
-});
+//   if(!profile.name || !profile.email) {
+//     return res.status(400).json({ success:false,  message: 'Name and email are required' });
+//     // return res.status(400).json({ message: 'Profile data is required' });
+//   }
+
 
 app.post('/profile', (req, res) => {
   res.send('profile is running'); 
