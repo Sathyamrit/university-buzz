@@ -24,6 +24,8 @@ export const Navbar = () => {
         <button className="notification-btn" aria-label="Notifications">
           🔔 {/* Unicode bell icon */}
         </button>
+        <Link to="/signup" >Signup</Link>
+        <Link to="/login" >Login</Link>
         <button className="profile-btn" aria-label="Profile">
           👤 {/* Unicode user icon */}
         </button>
