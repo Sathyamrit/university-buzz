@@ -1,28 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import './Home.css';
 
 export const Home = () => {
-  // State to hold posts
+  const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([
     { id: 1, content: 'This is the first post.' },
     { id: 2, content: 'This is the second post.' },
     { id: 3, content: 'This is the third post.' },
   ]);
 
+  useEffect(() => {
+    // Retrieve user data from localStorage
+    const loggedInUser = JSON.parse(localStorage.getItem('user'));
+    if (loggedInUser) {
+      setUser(loggedInUser);
+    } else {
+      // Redirect to login if no user is found
+      window.location.href = '/login';
+    }
+  }, []);
+
+  if (!user) {
+    return <p>Loading...</p>;
+  }
+
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '20px' }}>
+    <div className="home-container">
       {/* Left: Profile Box */}
-      <div style={{ flex: '1', marginRight: '20px', border: '1px solid #ccc', padding: '10px', borderRadius: '8px' }}>
+      <div className="profile-box">
         <h3>Profile</h3>
-        <p><strong>Name:</strong> John Doety</p>
-        <p><strong>Branch:</strong> Computer Science</p>
-        <p><strong>Posts:</strong> 42</p>
-        <p><strong>Friends:</strong> 120</p>
-        <p><strong>Clubs:</strong> 5</p>
-        <button style={{ marginTop: '10px', padding: '5px 10px', cursor: 'pointer' }}>View Profile</button>
+        <p><strong>Name:</strong> {user.name}</p>
+        <p><strong>Email:</strong> {user.email}</p>
+        <p><strong>Phone:</strong> {user.phone}</p>
+        <p><strong>Address:</strong> {user.address}</p>
+        <button className="view-profile-btn" onClick={() => window.location.href = '/profile'}>
+          View Profile
+        </button>
       </div>
 
       {/* Middle: Post Feed */}
-      <div style={{ flex: '2', marginRight: '20px', border: '1px solid #ccc', padding: '10px', borderRadius: '8px' }}>
+      <div className="post-feed">
         <h3>Posts</h3>
         <div>
           {posts.map((post) => (
@@ -32,15 +49,16 @@ export const Home = () => {
       </div>
 
       {/* Right: Upcoming Events */}
-      <div style={{ flex: '1', border: '1px solid #ccc', padding: '10px', borderRadius: '8px' }}>
+      <div className="events-box">
         <h3>Upcoming Events</h3>
         <ul>
           <li>Event 1: Hackathon - May 5</li>
           <li>Event 2: Workshop - May 10</li>
           <li>Event 3: Seminar - May 15</li>
-          {/* Add more events dynamically */}
         </ul>
       </div>
     </div>
   );
 };
+
+export default Home;

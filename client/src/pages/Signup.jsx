@@ -6,6 +6,7 @@ export const Signup = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    password: '',
     phone: '',
     address: '',
   });
@@ -17,10 +18,34 @@ export const Signup = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form Data Submitted:', formData);
-    // Add logic to send data to the backend
+
+    try {
+      const response = await fetch('http://localhost:5000/api/profiles', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert('Signup successful!');
+        setFormData({
+          name: '',
+          email: '',
+          password: '',
+          phone: '',
+          address: '',
+        });
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Error during signup:', error);
+      alert('An error occurred. Please try again.');
+    }
   };
 
   return (
@@ -49,6 +74,20 @@ export const Signup = () => {
             id="email"
             name="email"
             value={formData.email}
+            onChange={handleChange}
+            required
+            className="form-input"
+          />
+        </div>
+
+        {/* Password Field */}
+        <div className="form-group">
+          <label htmlFor="password" className="form-label">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
             onChange={handleChange}
             required
             className="form-input"

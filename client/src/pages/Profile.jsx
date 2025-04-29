@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Profile.css';
 
 export const Profile = () => {
+  const [user, setUser] = useState(null); // State to hold user data
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState('');
+
+  // Retrieve user data from localStorage
+  useEffect(() => {
+    const loggedInUser = JSON.parse(localStorage.getItem('user'));
+    if (!loggedInUser) {
+      window.location.href = '/login'; // Redirect to login if no user is found
+    } else {
+      setUser(loggedInUser); // Set user data
+    }
+  }, []);
 
   // Handle adding a new post
   const handleAddPost = () => {
@@ -26,13 +37,19 @@ export const Profile = () => {
     setPosts(posts.filter((post) => post.id !== id));
   };
 
+  if (!user) {
+    return <p>Loading...</p>; // Show loading while user data is being retrieved
+  }
+
   return (
     <div className="profile-container">
       {/* Profile Section */}
       <div className="profile-details">
-        <h2 className="profile-title">Your Profile</h2>
-        <p><strong>Name:</strong> John Doe</p>
-        <p><strong>Email:</strong> john.doe@example.com</p>
+        <h3>Profile</h3>
+        <p><strong>Name:</strong> {user.name}</p>
+        <p><strong>Email:</strong> {user.email}</p>
+        <p><strong>Phone:</strong> {user.phone}</p>
+        <p><strong>Address:</strong> {user.address}</p>
         <p><strong>Branch:</strong> Computer Science</p>
         <p><strong>Posts:</strong> {posts.length}</p>
       </div>

@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors"; 
 import { connectDB } from "./config/db.js";
 import profileRoutes from "./routes/profile.route.js"; //import the profile routes
 import postRoutes from "./routes/post.route.js"; //import the post routes
@@ -8,6 +9,8 @@ import eventRoutes from "./routes/event.route.js"; //import the event routes
 dotenv.config();
 
 const app = express();
+
+app.use(cors()); //enable CORS for all routes
 
 app.use(express.json()); //middleware to parse JSON data from incoming requests
 
@@ -25,10 +28,12 @@ app.use("/api/events", eventRoutes); //use the eventRoutes for all requests to /
 //   res.send('API is running...'); //send a response when the root URL is accessed
 // });
 
+// Server static files from the "public" directory and frontend
 app.get("/", (req, res) => {
   res.sendFile("index.html", { root: "server/views" }); //send the index.html file when the root URL is accessed
 });
 
+// Start server
 const startServer = async () => {
   try {
     await connectDB(); //connect to the database

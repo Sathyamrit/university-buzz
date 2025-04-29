@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { createProfile } from '../controllers/profile.controller.js'; //import the createProfile function from the profile controller
+import { createProfile, loginProfile } from '../controllers/profile.controller.js'; //import the createProfile function from the profile controller
 
 const router = express.Router(); //create a new router object using the express.Router() method
 
@@ -23,6 +23,8 @@ const router = express.Router(); //create a new router object using the express.
 //     res.status(500).json({ success: false, message: 'Server error', error: error.message });
 //   }
 // });
+
+router.post('/login', loginProfile); //use the loginProfile function for all requests to /api/profiles/login
 
 router.post('/', createProfile); //use the createProfile function for all requests to /api/profiles
 

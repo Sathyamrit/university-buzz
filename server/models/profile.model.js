@@ -19,11 +19,14 @@ const profileSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-   
+    password: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
-  } // timestamps: true will add createdAt and updatedAt fields automatically
+  }
 );
 
 const Profile = mongoose.model("Profile", profileSchema);

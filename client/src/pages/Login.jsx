@@ -13,16 +13,33 @@ export const Login = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login Data:', formData);
 
-    // Add logic to authenticate the user
-    const isAuthenticated = true; // Replace with actual authentication logic
-    if (isAuthenticated) {
-      navigate('/'); // Redirect to homepage
-    } else {
-      alert('Invalid username or password'); // Handle authentication failure
+    try {
+      const response = await fetch('http://localhost:5000/api/profiles/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: formData.username, // Use email as username
+          password: formData.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Store user data in localStorage
+        localStorage.setItem('user', JSON.stringify(data.data));
+
+        // Redirect to homepage
+        navigate('/');
+      } else {
+        alert(data.message); // Show error message
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      alert('An error occurred. Please try again.');
     }
   };
 

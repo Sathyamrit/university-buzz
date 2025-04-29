@@ -26,9 +26,11 @@ export const Navbar = () => {
         </button>
         <Link to="/signup" >Signup</Link>
         <Link to="/login" >Login</Link>
-        <button className="profile-btn" aria-label="Profile">
-          👤 {/* Unicode user icon */}
-        </button>
+        <Link to="/profile">
+          <button className="profile-btn" aria-label="Profile">
+            👤 {/* Unicode user icon */}
+          </button>
+        </Link>
       </div>
     </nav>
   );
