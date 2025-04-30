@@ -23,6 +23,12 @@ const profileSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    joinedClubs: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Club", // Reference the Club model
+      },
+    ],
   },
   {
     timestamps: true,

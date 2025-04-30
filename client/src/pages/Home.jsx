@@ -4,13 +4,15 @@ import './Home.css';
 export const Home = () => {
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
+  const [events, setEvents] = useState([]); // State to hold events
 
   useEffect(() => {
     // Retrieve user data from localStorage
     const loggedInUser = JSON.parse(localStorage.getItem('user'));
     if (loggedInUser) {
       setUser(loggedInUser);
-      fetchUserPosts(loggedInUser.email); // Fetch posts for the logged-in user
+      fetchUserPosts(); // Fetch posts for the logged-in user
+      fetchEvents(); // Fetch upcoming events
     } else {
       // Redirect to login if no user is found
       window.location.href = '/login';
@@ -29,6 +31,21 @@ export const Home = () => {
       }
     } catch (error) {
       console.error('Error fetching posts:', error);
+    }
+  };
+
+  // Fetch upcoming events
+  const fetchEvents = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/events'); // Fetch all events
+      const data = await response.json();
+      if (data.success) {
+        setEvents(data.data); // Set all events from the database
+      } else {
+        console.error('Failed to fetch events:', data.message);
+      }
+    } catch (error) {
+      console.error('Error fetching events:', error);
     }
   };
 
@@ -68,9 +85,16 @@ export const Home = () => {
       <div className="events-box">
         <h3>Upcoming Events</h3>
         <ul>
-          <li>Event 1: Hackathon - May 5</li>
-          <li>Event 2: Workshop - May 10</li>
-          <li>Event 3: Seminar - May 15</li>
+          {events.length === 0 ? (
+            <p>No upcoming events.</p>
+          ) : (
+            events.map((event) => (
+              <li key={event._id}>
+                <strong>{event.name}</strong> - {event.time} <br />
+                <span className="event-club">Hosted by: {event.clubId?.name || 'Unknown Club'}</span>
+              </li>
+            ))
+          )}
         </ul>
       </div>
     </div>

@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import './Profile.css';
+import React, { useEffect, useState } from "react";
+import "./Profile.css";
 
 export const Profile = () => {
   const [user, setUser] = useState(null); // State to hold user data
   const [posts, setPosts] = useState([]); // State to hold posts
-  const [newPost, setNewPost] = useState(''); // State to hold new post content
+  const [newPost, setNewPost] = useState(""); // State to hold new post content
 
   // Retrieve user data from localStorage
   useEffect(() => {
-    const loggedInUser = JSON.parse(localStorage.getItem('user'));
+    const loggedInUser = JSON.parse(localStorage.getItem("user"));
     if (!loggedInUser) {
-      window.location.href = '/login'; // Redirect to login if no user is found
+      window.location.href = "/login"; // Redirect to login if no user is found
     } else {
       setUser(loggedInUser); // Set user data
     }
@@ -22,7 +22,9 @@ export const Profile = () => {
 
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/posts?email=${user.email}`);
+        const response = await fetch(
+          `http://localhost:5000/api/posts?email=${user.email}`
+        );
         const data = await response.json();
         if (data.success) {
           setPosts(data.data);
@@ -35,24 +37,50 @@ export const Profile = () => {
     fetchPosts();
   }, []);
 
+  // Fetch joined clubs in the useEffect
+  useEffect(() => {
+    const fetchJoinedClubs = async () => {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      try {
+        const response = await fetch(`http://localhost:5000/api/profiles/${user._id}/joined-clubs`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        if (data.success) {
+          setUser((prevUser) => ({
+            ...prevUser,
+            joinedClubs: data.data, // Update the joinedClubs in the user state
+          }));
+        }
+      } catch (error) {
+        console.error("Error fetching joined clubs:", error);
+      }
+    };
+
+    fetchJoinedClubs();
+  }, []);
+
   // Handle adding a new post
   const handleAddPost = async () => {
-    if (newPost.trim() === '') {
-      alert('Post content cannot be empty.');
+    if (newPost.trim() === "") {
+      alert("Post content cannot be empty.");
       return;
     }
 
-    const user = JSON.parse(localStorage.getItem('user')); // Retrieve user data from localStorage
+    const user = JSON.parse(localStorage.getItem("user")); // Retrieve user data from localStorage
 
     try {
-      const response = await fetch('http://localhost:5000/api/posts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://localhost:5000/api/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           title: `Post by ${user.name}`, // Example title
           content: newPost,
           email: user.email, // Associate the post with the user's email
-          type: 'user', // Specify the type as 'user'
+          type: "user", // Specify the type as 'user'
         }),
       });
 
@@ -60,13 +88,13 @@ export const Profile = () => {
 
       if (data.success) {
         setPosts([...posts, data.data]); // Add the new post to the state
-        setNewPost(''); // Clear the input field
+        setNewPost(""); // Clear the input field
       } else {
-        alert('Failed to add post: ' + data.message);
+        alert("Failed to add post: " + data.message);
       }
     } catch (error) {
-      console.error('Error adding post:', error);
-      alert('An error occurred while adding the post.');
+      console.error("Error adding post:", error);
+      alert("An error occurred while adding the post.");
     }
   };
 
@@ -74,7 +102,7 @@ export const Profile = () => {
   const handleDeletePost = async (id) => {
     try {
       const response = await fetch(`http://localhost:5000/api/posts/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
 
       const data = await response.json();
@@ -82,11 +110,11 @@ export const Profile = () => {
       if (data.success) {
         setPosts(posts.filter((post) => post._id !== id)); // Remove the deleted post from the state
       } else {
-        alert('Failed to delete post: ' + data.message);
+        alert("Failed to delete post: " + data.message);
       }
     } catch (error) {
-      console.error('Error deleting post:', error);
-      alert('An error occurred while deleting the post.');
+      console.error("Error deleting post:", error);
+      alert("An error occurred while deleting the post.");
     }
   };
 
@@ -99,11 +127,21 @@ export const Profile = () => {
       {/* Profile Section */}
       <div className="profile-details">
         <h3>Profile</h3>
-        <p><strong>Name:</strong> {user.name}</p>
-        <p><strong>Email:</strong> {user.email}</p>
-        <p><strong>Phone:</strong> {user.phone}</p>
-        <p><strong>Address:</strong> {user.address}</p>
-        <p><strong>Posts:</strong> {posts.length}</p>
+        <p>
+          <strong>Name:</strong> {user.name}
+        </p>
+        <p>
+          <strong>Email:</strong> {user.email}
+        </p>
+        <p>
+          <strong>Phone:</strong> {user.phone}
+        </p>
+        <p>
+          <strong>Address:</strong> {user.address}
+        </p>
+        <p>
+          <strong>Posts:</strong> {posts.length}
+        </p>
       </div>
 
       {/* Add Post Section */}
@@ -128,7 +166,9 @@ export const Profile = () => {
         ) : (
           posts.map((post) => (
             <div key={post._id} className="post-item">
-              <p><strong>{post.title}:</strong> {post.content}</p>
+              <p>
+                <strong>{post.title}:</strong> {post.content}
+              </p>
               <div className="post-actions">
                 <button
                   className="delete-button"
@@ -139,6 +179,20 @@ export const Profile = () => {
               </div>
             </div>
           ))
+        )}
+      </div>
+
+      {/* Joined Clubs Section */}
+      <div className="joined-clubs-section">
+        <h3>Joined Clubs</h3>
+        {user.joinedClubs.length === 0 ? (
+          <p>You haven't joined any clubs yet.</p>
+        ) : (
+          <ul>
+            {user.joinedClubs.map((club) => (
+              <li key={club._id}>{club.name}</li> // Add a unique key prop
+            ))}
+          </ul>
         )}
       </div>
     </div>

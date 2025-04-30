@@ -65,3 +65,48 @@ export const loginProfile = async (req, res) => {
   }
 };
 
+export const joinClub = async (req, res) => {
+  const { userId, clubId } = req.body;
+
+  if (!userId || !clubId) {
+    return res.status(400).json({ success: false, message: "User ID and Club ID are required" });
+  }
+
+  try {
+    const user = await Profile.findById(userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    // Check if the club is already joined
+    if (user.joinedClubs.includes(clubId)) {
+      return res.status(400).json({ success: false, message: "Club already joined" });
+    }
+
+    // Add the club to the joinedClubs array
+    user.joinedClubs.push(clubId);
+    await user.save();
+
+    res.status(200).json({ success: true, message: "Club joined successfully", data: user });
+  } catch (error) {
+    console.error("Error joining club:", error.message);
+    res.status(500).json({ success: false, message: "Server error", error: error.message });
+  }
+};
+
+export const getJoinedClubs = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await Profile.findById(id).populate("joinedClubs"); // Populate joinedClubs with club details
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    res.status(200).json({ success: true, data: user.joinedClubs });
+  } catch (error) {
+    console.error("Error fetching joined clubs:", error.message);
+    res.status(500).json({ success: false, message: "Server error", error: error.message });
+  }
+};
+

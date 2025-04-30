@@ -3,28 +3,78 @@ import './Clubs.css';
 
 export const Clubs = () => {
   const [clubs, setClubs] = useState([]); // State to hold clubs data
+  const [joinedClubs, setJoinedClubs] = useState([]); // State to hold joined clubs
   const [loading, setLoading] = useState(true); // State to handle loading
 
-  // Fetch clubs from the backend
+  // Fetch clubs and joined clubs from the backend
   useEffect(() => {
-    const fetchClubs = async () => {
+    const fetchClubsAndJoinedClubs = async () => {
+      const user = JSON.parse(localStorage.getItem("user")); // Retrieve logged-in user data
+
       try {
-        const response = await fetch('http://localhost:5000/api/clubs'); // Replace with your backend API URL
-        const data = await response.json();
-        if (data.success) {
-          setClubs(data.data); // Set the fetched clubs data
+        // Fetch all clubs
+        const clubsResponse = await fetch('http://localhost:5000/api/clubs');
+        const clubsData = await clubsResponse.json();
+
+        // Fetch joined clubs for the user
+        const joinedClubsResponse = await fetch(`http://localhost:5000/api/profiles/${user._id}/joined-clubs`);
+        const joinedClubsData = await joinedClubsResponse.json();
+
+        if (clubsData.success && joinedClubsData.success) {
+          // Mark clubs as joined if they are in the user's joinedClubs list
+          const joinedClubIds = joinedClubsData.data.map((club) => club._id);
+          const updatedClubs = clubsData.data.map((club) => ({
+            ...club,
+            joined: joinedClubIds.includes(club._id),
+          }));
+
+          setClubs(updatedClubs); // Update clubs with joined status
+          setJoinedClubs(joinedClubIds); // Store joined club IDs
         } else {
-          console.error('Failed to fetch clubs:', data.message);
+          console.error('Failed to fetch clubs or joined clubs');
         }
       } catch (error) {
-        console.error('Error fetching clubs:', error);
+        console.error('Error fetching clubs or joined clubs:', error);
       } finally {
         setLoading(false); // Stop loading after fetching data
       }
     };
 
-    fetchClubs();
+    fetchClubsAndJoinedClubs();
   }, []);
+
+  const handleJoinClub = async (clubId) => {
+    const user = JSON.parse(localStorage.getItem("user")); // Retrieve logged-in user data
+
+    try {
+      const response = await fetch("http://localhost:5000/api/profiles/join-club", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: user._id,
+          clubId,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Update the localStorage with the updated user data
+        localStorage.setItem("user", JSON.stringify(data.data));
+        setClubs((prevClubs) =>
+          prevClubs.map((club) =>
+            club._id === clubId ? { ...club, joined: true } : club
+          )
+        );
+        setJoinedClubs((prevJoinedClubs) => [...prevJoinedClubs, clubId]); // Add the club to joinedClubs
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Error joining club:", error);
+      alert("An error occurred while joining the club.");
+    }
+  };
 
   if (loading) {
     return <p>Loading clubs...</p>; // Show loading message while fetching data
@@ -58,7 +108,13 @@ export const Clubs = () => {
                 </div>
                 <div className="club-footer">
                   <span className="club-members">👥 {club.members}</span>
-                  <button className="join-club-button">Join Club</button>
+                  <button
+                    className="join-club-button"
+                    onClick={() => handleJoinClub(club._id)}
+                    disabled={club.joined} // Disable the button if already joined
+                  >
+                    {club.joined ? "Joined" : "Join Club"}
+                  </button>
                 </div>
               </div>
             </div>
