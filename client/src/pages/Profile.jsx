@@ -14,30 +14,26 @@ export const Profile = () => {
     } else {
       setUser(loggedInUser); // Set user data
     }
-
-    // Fetch posts from the database
-    // fetchPosts();
   }, []);
 
-  // Fetch posts from the database when the user is set
-  useEffect(() => {
-    if (user) {
-      fetchPosts();
-    }
-  }, [user]);
-
   // Fetch posts from the database
-  const fetchPosts = async () => {
-    try {
-      const response = await fetch(`http://localhost:5000/api/posts?email=${user.email}`); // Fetch posts for the logged-in user
-      const data = await response.json();
-      if (data.success) {
-        setPosts(data.data); // Set posts from the database
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/posts?email=${user.email}`);
+        const data = await response.json();
+        if (data.success) {
+          setPosts(data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching posts:", error);
       }
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-    }
-  };
+    };
+
+    fetchPosts();
+  }, []);
 
   // Handle adding a new post
   const handleAddPost = async () => {

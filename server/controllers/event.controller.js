@@ -30,3 +30,13 @@ export const getEventsByClub = async (req, res) => {
   }
 };
 
+export const getAllEvents = async (req, res) => {
+  try {
+    const events = await Event.find(); // Fetch all events from the database
+    res.status(200).json({ success: true, data: events });
+  } catch (error) {
+    console.error("Error fetching all events:", error.message);
+    res.status(500).json({ success: false, message: "Server error", error: error.message });
+  }
+};
+

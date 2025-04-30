@@ -11,8 +11,18 @@ const postSchema = new mongoose.Schema(
       required: true,
     },
     email: {
+      type: String, // For user posts
+      default: null,
+    },
+    clubId: {
+      type: mongoose.Schema.Types.ObjectId, // For club posts
+      ref: "Club",
+      default: null,
+    },
+    type: {
       type: String,
-      required: true, // Associate the post with a user's email
+      enum: ["user", "club"], // To differentiate between user and club posts
+      required: true,
     },
   },
   {

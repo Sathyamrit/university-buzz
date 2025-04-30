@@ -9,11 +9,18 @@ export const Events = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('/api/events'); // Replace with your API endpoint
+        const response = await fetch("http://localhost:5000/api/events");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
-        setEvents(data);
+        if (data.success) {
+          setEvents(data.data); // Set the fetched events in state
+        } else {
+          console.error("Failed to fetch events:", data.message);
+        }
       } catch (error) {
-        console.error('Error fetching events:', error);
+        console.error("Error fetching events:", error);
       } finally {
         setLoading(false);
       }
@@ -42,11 +49,11 @@ export const Events = () => {
               <p className="no-events">No upcoming events available.</p>
             ) : (
               upcomingEvents.map((event) => (
-                <div key={event.id} className="event-card">
+                <div key={event._id} className="event-card">
                   <h3 className="event-name">{event.name}</h3>
                   <p className="event-about">{event.about}</p>
                   <p className="event-details">
-                    <strong>Date:</strong> {event.date} <br />
+                    <strong>Date:</strong> {new Date(event.date).toLocaleDateString()} <br />
                     <strong>Time:</strong> {event.time} <br />
                     <strong>Venue:</strong> {event.venue}
                   </p>

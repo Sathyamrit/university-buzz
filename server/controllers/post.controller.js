@@ -2,23 +2,24 @@ import mongoose from "mongoose";
 import Post from "../models/post.model.js";
 
 export const createPost = async (req, res) => {
-  const { title, content, email, clubId } = req.body; // Extract data from the request body
+  const { title, content, email, clubId, type } = req.body;
 
   // Validate required fields
-  if (!title || !content || (!email && !clubId)) {
+  if (!content || (!email && !clubId) || !type) {
     return res.status(400).json({
       success: false,
-      message: "Title, content, and either email or clubId are required",
+      message: "Content, type, and either email or clubId are required",
     });
   }
 
   try {
     // Create a new post object
     const newPost = new Post({
-      title,
+      title: title || "Untitled Post", // Default title if not provided
       content,
-      email: email || null, // Set email if provided
-      clubId: clubId || null, // Set clubId if provided
+      email: email || null,
+      clubId: clubId || null,
+      type,
     });
 
     // Save the post to the database
@@ -58,25 +59,31 @@ export const getPost = async (req, res) => {
   }
 };
 
+export const getPostsByProfile = async (req, res) => {
+  const { email } = req.query;
+
+  try {
+    const posts = await Post.find({ email, type: "user" });
+    res.status(200).json({ success: true, data: posts });
+  } catch (error) {
+    console.error("Error fetching posts by profile:", error.message);
+    res.status(500).json({ success: false, message: "Server error", error: error.message });
+  }
+};
+
 export const getPostsByClub = async (req, res) => {
-  const { clubId } = req.params; // Get the clubId from the request parameters
+  const { clubId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(clubId)) {
-    return res.status(400).json({ success: false, message: "Invalid club ID" });
+    return res.status(400).json({ success: false, message: 'Invalid club ID' });
   }
 
   try {
-    // Fetch posts associated with the given clubId
-    const posts = await Post.find({ clubId });
-
-    if (!posts || posts.length === 0) {
-      return res.status(404).json({ success: false, message: "No posts found for this club" });
-    }
-
+    const posts = await Post.find({ clubId, type: 'club' });
     res.status(200).json({ success: true, data: posts });
   } catch (error) {
-    console.error("Error fetching posts by club:", error.message);
-    res.status(500).json({ success: false, message: "Server error", error: error.message });
+    console.error('Error fetching posts by club:', error.message);
+    res.status(500).json({ success: false, message: 'Server error', error: error.message });
   }
 };
 
