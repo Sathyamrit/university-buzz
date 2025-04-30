@@ -37,7 +37,12 @@ export const Profile = () => {
 
   // Handle adding a new post
   const handleAddPost = async () => {
-    if (newPost.trim() === '') return;
+    if (newPost.trim() === '') {
+      alert('Post content cannot be empty.');
+      return;
+    }
+
+    const user = JSON.parse(localStorage.getItem('user')); // Retrieve user data from localStorage
 
     try {
       const response = await fetch('http://localhost:5000/api/posts', {
@@ -47,6 +52,7 @@ export const Profile = () => {
           title: `Post by ${user.name}`, // Example title
           content: newPost,
           email: user.email, // Associate the post with the user's email
+          type: 'user', // Specify the type as 'user'
         }),
       });
 
