@@ -43,23 +43,25 @@ export const loginProfile = async (req, res) => {
   }
 
   try {
-    // Find the user by email
     const user = await Profile.findOne({ email });
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
 
-    // Compare the password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
 
-    // Return user data (excluding the password)
     const { password: _, ...userData } = user.toObject();
-    res.status(200).json({ success: true, message: 'Login successful', data: userData });
+    res.status(200).json({
+      success: true,
+      message: 'Login successful',
+      data: { ...userData, type: 'user' }, // Add type field
+    });
   } catch (error) {
-    console.error("Error in Login Profile:", error.message);
+    console.error('Error in Login Profile:', error.message);
     res.status(500).json({ success: false, message: 'Server error', error: error.message });
   }
 };
+

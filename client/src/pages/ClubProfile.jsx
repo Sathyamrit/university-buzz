@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ClubProfile.css';
 
 export const ClubProfile = () => {
@@ -59,6 +59,35 @@ export const ClubProfile = () => {
   const handleDeletePost = (id) => {
     setPosts(posts.filter((post) => post.id !== id));
   };
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/events/${clubId}`);
+        const data = await response.json();
+        if (data.success) {
+          setEvents(data.data);
+        }
+      } catch (error) {
+        console.error('Error fetching events:', error);
+      }
+    };
+
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/posts/${clubId}`);
+        const data = await response.json();
+        if (data.success) {
+          setPosts(data.data);
+        }
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+
+    fetchEvents();
+    fetchPosts();
+  }, []);
 
   return (
     <div className="club-profile-container">

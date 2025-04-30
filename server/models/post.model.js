@@ -10,6 +10,10 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    email: {
+      type: String,
+      required: true, // Associate the post with a user's email
+    },
   },
   {
     timestamps: true,

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const postSchema = new mongoose.Schema(
+const eventSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -22,11 +22,16 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    clubId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Club",
+      required: true,
+    },
   },
   {
     timestamps: true,
   } // timestamps: true will add createdAt and updatedAt fields automatically
 );
 
-const Event = mongoose.model("Event", postSchema);
+const Event = mongoose.model("Event", eventSchema);
 export default Event;

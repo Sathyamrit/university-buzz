@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 export const Login = () => {
-  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [formData, setFormData] = useState({ username: '', password: '', type: 'user' }); // Add type to differentiate between user and club
   const navigate = useNavigate();
 
   // Handle input change
@@ -15,27 +15,35 @@ export const Login = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-      const response = await fetch('http://localhost:5000/api/profiles/login', {
+      const endpoint =
+        formData.type === 'user'
+          ? 'http://localhost:5000/api/profiles/login' // User login endpoint
+          : 'http://localhost:5000/api/clubs/login'; // Club login endpoint
+  
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email: formData.username, // Use email as username
+          email: formData.username,
           password: formData.password,
         }),
       });
-
+  
       const data = await response.json();
-
+      console.log('Response data:', data);
+  
       if (data.success) {
-        // Store user data in localStorage
+        // Store user or club data in localStorage
         localStorage.setItem('user', JSON.stringify(data.data));
-
-        // Redirect to homepage
-        navigate('/');
+        if (data.data.type === 'user') {
+          navigate('/profile'); // Redirect to user profile
+        } else {
+          navigate('/clubprofile'); // Redirect to club profile
+        }
       } else {
-        alert(data.message); // Show error message
+        alert(data.message);
       }
     } catch (error) {
       console.error('Error during login:', error);
@@ -47,6 +55,21 @@ export const Login = () => {
     <div className="login-container">
       <h2 className="login-title">Login</h2>
       <form className="login-form" onSubmit={handleSubmit}>
+        {/* Login Type Selector */}
+        <div className="form-group">
+          <label htmlFor="type" className="form-label">Login as:</label>
+          <select
+            id="type"
+            name="type"
+            value={formData.type}
+            onChange={handleChange}
+            className="form-input"
+          >
+            <option value="user">User</option>
+            <option value="club">Club</option>
+          </select>
+        </div>
+
         {/* Username Field */}
         <div className="form-group">
           <label htmlFor="username" className="form-label">Username:</label>

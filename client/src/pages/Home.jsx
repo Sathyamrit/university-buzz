@@ -3,22 +3,34 @@ import './Home.css';
 
 export const Home = () => {
   const [user, setUser] = useState(null);
-  const [posts, setPosts] = useState([
-    { id: 1, content: 'This is the first post.' },
-    { id: 2, content: 'This is the second post.' },
-    { id: 3, content: 'This is the third post.' },
-  ]);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     // Retrieve user data from localStorage
     const loggedInUser = JSON.parse(localStorage.getItem('user'));
     if (loggedInUser) {
       setUser(loggedInUser);
+      fetchUserPosts(loggedInUser.email); // Fetch posts for the logged-in user
     } else {
       // Redirect to login if no user is found
       window.location.href = '/login';
     }
   }, []);
+
+  // Fetch posts for the logged-in user
+  const fetchUserPosts = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/posts'); // Fetch all posts
+      const data = await response.json();
+      if (data.success) {
+        setPosts(data.data); // Set all posts from the database
+      } else {
+        console.error('Failed to fetch posts:', data.message);
+      }
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    }
+  };
 
   if (!user) {
     return <p>Loading...</p>;
@@ -42,9 +54,13 @@ export const Home = () => {
       <div className="post-feed">
         <h3>Posts</h3>
         <div>
-          {posts.map((post) => (
-            <p key={post.id}><strong>Post {post.id}:</strong> {post.content}</p>
-          ))}
+          {posts.length === 0 ? (
+            <p>No posts to display.</p>
+          ) : (
+            posts.map((post) => (
+              <p key={post._id}><strong>{post.title}:</strong> {post.content}</p>
+            ))
+          )}
         </div>
       </div>
 
