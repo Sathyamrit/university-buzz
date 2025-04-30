@@ -43,7 +43,9 @@ export const Profile = () => {
       const user = JSON.parse(localStorage.getItem("user"));
 
       try {
-        const response = await fetch(`http://localhost:5000/api/profiles/${user._id}/joined-clubs`);
+        const response = await fetch(
+          `http://localhost:5000/api/profiles/${user._id}/joined-clubs`
+        );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

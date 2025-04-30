@@ -54,8 +54,10 @@ export const getPost = async (req, res) => {
 
     res.status(200).json({ success: true, data: posts });
   } catch (error) {
-    console.error('Error fetching posts:', error.message);
-    res.status(500).json({ success: false, message: 'Server error', error: error.message });
+    console.error("Error fetching posts:", error.message);
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
   }
 };
 
@@ -67,7 +69,9 @@ export const getPostsByProfile = async (req, res) => {
     res.status(200).json({ success: true, data: posts });
   } catch (error) {
     console.error("Error fetching posts by profile:", error.message);
-    res.status(500).json({ success: false, message: "Server error", error: error.message });
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
   }
 };
 
@@ -75,15 +79,17 @@ export const getPostsByClub = async (req, res) => {
   const { clubId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(clubId)) {
-    return res.status(400).json({ success: false, message: 'Invalid club ID' });
+    return res.status(400).json({ success: false, message: "Invalid club ID" });
   }
 
   try {
-    const posts = await Post.find({ clubId, type: 'club' });
+    const posts = await Post.find({ clubId, type: "club" });
     res.status(200).json({ success: true, data: posts });
   } catch (error) {
-    console.error('Error fetching posts by club:', error.message);
-    res.status(500).json({ success: false, message: 'Server error', error: error.message });
+    console.error("Error fetching posts by club:", error.message);
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
   }
 };
 
@@ -97,12 +103,21 @@ export const deletePost = async (req, res) => {
   try {
     const deletedPost = await Post.findByIdAndDelete(id); //find the post by ID and delete it
     if (!deletedPost) {
-      return res.status(404).json({ success: false, message: "Post not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Post not found" });
     }
-    res.status(200).json({ success: true, message: "Post deleted successfully", data: deletedPost });
+    res
+      .status(200)
+      .json({
+        success: true,
+        message: "Post deleted successfully",
+        data: deletedPost,
+      });
   } catch (error) {
     console.error("Error in Delete Post", error.message); //log the error message to the console
-    res.status(500).json({ success: false, message: "Server error", error: error.message });
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
   }
 };
-

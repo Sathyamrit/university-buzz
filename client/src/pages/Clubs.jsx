@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import './Clubs.css';
+import React, { useEffect, useState } from "react";
+import "./Clubs.css";
 
 export const Clubs = () => {
   const [clubs, setClubs] = useState([]); // State to hold clubs data
@@ -13,11 +13,13 @@ export const Clubs = () => {
 
       try {
         // Fetch all clubs
-        const clubsResponse = await fetch('http://localhost:5000/api/clubs');
+        const clubsResponse = await fetch("http://localhost:5000/api/clubs");
         const clubsData = await clubsResponse.json();
 
         // Fetch joined clubs for the user
-        const joinedClubsResponse = await fetch(`http://localhost:5000/api/profiles/${user._id}/joined-clubs`);
+        const joinedClubsResponse = await fetch(
+          `http://localhost:5000/api/profiles/${user._id}/joined-clubs`
+        );
         const joinedClubsData = await joinedClubsResponse.json();
 
         if (clubsData.success && joinedClubsData.success) {
@@ -31,10 +33,10 @@ export const Clubs = () => {
           setClubs(updatedClubs); // Update clubs with joined status
           setJoinedClubs(joinedClubIds); // Store joined club IDs
         } else {
-          console.error('Failed to fetch clubs or joined clubs');
+          console.error("Failed to fetch clubs or joined clubs");
         }
       } catch (error) {
-        console.error('Error fetching clubs or joined clubs:', error);
+        console.error("Error fetching clubs or joined clubs:", error);
       } finally {
         setLoading(false); // Stop loading after fetching data
       }
@@ -47,14 +49,17 @@ export const Clubs = () => {
     const user = JSON.parse(localStorage.getItem("user")); // Retrieve logged-in user data
 
     try {
-      const response = await fetch("http://localhost:5000/api/profiles/join-club", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: user._id,
-          clubId,
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:5000/api/profiles/join-club",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: user._id,
+            clubId,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -86,7 +91,8 @@ export const Clubs = () => {
       <div className="hero-section">
         <h1 className="hero-title">Discover University Clubs & Societies</h1>
         <p className="hero-subtitle">
-          Find your community on campus. Join clubs that match your interests, make new friends, and enhance your university experience.
+          Find your community on campus. Join clubs that match your interests,
+          make new friends, and enhance your university experience.
         </p>
       </div>
 
@@ -103,7 +109,9 @@ export const Clubs = () => {
                 <p className="club-description">{club.description}</p>
                 <div className="club-tags">
                   {club.tags.map((tag, index) => (
-                    <span key={index} className="club-tag">{tag}</span>
+                    <span key={index} className="club-tag">
+                      {tag}
+                    </span>
                   ))}
                 </div>
                 <div className="club-footer">

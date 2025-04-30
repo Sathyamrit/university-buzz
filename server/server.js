@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import cors from "cors"; 
+import cors from "cors";
 import { connectDB } from "./config/db.js";
 import profileRoutes from "./routes/profile.route.js"; //import the profile routes
 import postRoutes from "./routes/post.route.js"; //import the post routes
@@ -15,12 +15,12 @@ app.use(cors()); //enable CORS for all routes
 
 app.use(express.json()); //middleware to parse JSON data from incoming requests
 
-app.use(express.static('public')); 
+app.use(express.static("public"));
 
 app.use("/api/profiles", profileRoutes); //use the profileRoutes for all requests to /api/profiles
 app.use("/api/posts", postRoutes); //use the postRoutes for all requests to /api/posts
 app.use("/api/events", eventRoutes); //use the eventRoutes for all requests to /api/events
-app.use('/api/clubs', clubRoutes); // Register club routes
+app.use("/api/clubs", clubRoutes); // Register club routes
 
 // app.post("/profile", (req, res) => {
 //   res.send("profile is running");

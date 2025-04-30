@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import './ClubProfile.css';
+import React, { useState, useEffect } from "react";
+import "./ClubProfile.css";
 
 export const ClubProfile = () => {
   const [events, setEvents] = useState([]);
   const [posts, setPosts] = useState([]);
   const [newEvent, setNewEvent] = useState({
-    name: '',
-    about: '',
-    date: '',
-    time: '',
-    venue: '',
+    name: "",
+    about: "",
+    date: "",
+    time: "",
+    venue: "",
   });
-  const [newPost, setNewPost] = useState('');
+  const [newPost, setNewPost] = useState("");
 
   // Handle input change for event form
   const handleChange = (e) => {
@@ -21,9 +21,9 @@ export const ClubProfile = () => {
 
   // Fetch events and posts for the logged-in club
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user')); // Retrieve user data from localStorage
-    if (!user || user.type !== 'club') {
-      console.error('User is not logged in as a club');
+    const user = JSON.parse(localStorage.getItem("user")); // Retrieve user data from localStorage
+    if (!user || user.type !== "club") {
+      console.error("User is not logged in as a club");
       return;
     }
 
@@ -31,25 +31,29 @@ export const ClubProfile = () => {
 
     const fetchEvents = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/events/${clubId}`);
+        const response = await fetch(
+          `http://localhost:5000/api/events/${clubId}`
+        );
         const data = await response.json();
         if (data.success) {
           setEvents(data.data);
         }
       } catch (error) {
-        console.error('Error fetching events:', error);
+        console.error("Error fetching events:", error);
       }
     };
 
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/posts/club/${clubId}`);
+        const response = await fetch(
+          `http://localhost:5000/api/posts/club/${clubId}`
+        );
         const data = await response.json();
         if (data.success) {
           setPosts(data.data);
         }
       } catch (error) {
-        console.error('Error fetching posts:', error);
+        console.error("Error fetching posts:", error);
       }
     };
 
@@ -68,57 +72,57 @@ export const ClubProfile = () => {
     )
       return;
 
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem("user"));
     const clubId = user._id;
 
     try {
-      const response = await fetch('http://localhost:5000/api/events', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://localhost:5000/api/events", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...newEvent, clubId }),
       });
 
       const data = await response.json();
       if (data.success) {
         setEvents([...events, data.data]);
-        setNewEvent({ name: '', about: '', date: '', time: '', venue: '' });
+        setNewEvent({ name: "", about: "", date: "", time: "", venue: "" });
       }
     } catch (error) {
-      console.error('Error adding event:', error);
+      console.error("Error adding event:", error);
     }
   };
 
   // Handle adding a new post
   const handleAddPost = async () => {
-    if (newPost.trim() === '') {
-      alert('Post content cannot be empty.');
+    if (newPost.trim() === "") {
+      alert("Post content cannot be empty.");
       return;
     }
 
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem("user"));
     const clubId = user._id;
 
     try {
-      const response = await fetch('http://localhost:5000/api/posts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://localhost:5000/api/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           content: newPost,
           clubId,
-          type: 'club', // Specify the type as 'club'
+          type: "club", // Specify the type as 'club'
         }),
       });
 
       const data = await response.json();
       if (data.success) {
         setPosts([...posts, data.data]); // Add the new post to the state
-        setNewPost(''); // Clear the input field
+        setNewPost(""); // Clear the input field
       } else {
-        alert('Failed to add post: ' + data.message);
+        alert("Failed to add post: " + data.message);
       }
     } catch (error) {
-      console.error('Error adding post:', error);
-      alert('An error occurred while adding the post.');
+      console.error("Error adding post:", error);
+      alert("An error occurred while adding the post.");
     }
   };
 
@@ -127,9 +131,16 @@ export const ClubProfile = () => {
       {/* Club Profile Section */}
       <div className="club-profile-details">
         <h2 className="club-profile-title">Club Profile</h2>
-        <p><strong>Name:</strong> Programming Club</p>
-        <p><strong>Members:</strong> 126</p>
-        <p><strong>About:</strong> A community of coding enthusiasts working on exciting projects and hosting hackathons.</p>
+        <p>
+          <strong>Name:</strong> Programming Club
+        </p>
+        <p>
+          <strong>Members:</strong> 126
+        </p>
+        <p>
+          <strong>About:</strong> A community of coding enthusiasts working on
+          exciting projects and hosting hackathons.
+        </p>
       </div>
 
       {/* Add Event Section */}
@@ -185,11 +196,21 @@ export const ClubProfile = () => {
         ) : (
           events.map((event) => (
             <div key={event._id} className="event-item">
-              <p><strong>Event Name:</strong> {event.name}</p>
-              <p><strong>About:</strong> {event.about}</p>
-              <p><strong>Date:</strong> {event.date}</p>
-              <p><strong>Time:</strong> {event.time}</p>
-              <p><strong>Venue:</strong> {event.venue}</p>
+              <p>
+                <strong>Event Name:</strong> {event.name}
+              </p>
+              <p>
+                <strong>About:</strong> {event.about}
+              </p>
+              <p>
+                <strong>Date:</strong> {event.date}
+              </p>
+              <p>
+                <strong>Time:</strong> {event.time}
+              </p>
+              <p>
+                <strong>Venue:</strong> {event.venue}
+              </p>
             </div>
           ))
         )}
@@ -217,7 +238,9 @@ export const ClubProfile = () => {
         ) : (
           posts.map((post) => (
             <div key={post._id} className="post-item">
-              <p><strong>Post:</strong> {post.content}</p>
+              <p>
+                <strong>Post:</strong> {post.content}
+              </p>
             </div>
           ))
         )}

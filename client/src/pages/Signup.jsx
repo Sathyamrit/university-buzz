@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import './Signup.css'; 
+import React, { useState } from "react";
+import "./Signup.css";
 
 export const Signup = () => {
   // State to hold form data
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    phone: '',
-    address: '',
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+    address: "",
   });
 
   // Handle input change
@@ -22,29 +22,29 @@ export const Signup = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/api/profiles', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://localhost:5000/api/profiles", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       const data = await response.json();
 
       if (data.success) {
-        alert('Signup successful!');
+        alert("Signup successful!");
         setFormData({
-          name: '',
-          email: '',
-          password: '',
-          phone: '',
-          address: '',
+          name: "",
+          email: "",
+          password: "",
+          phone: "",
+          address: "",
         });
       } else {
         alert(data.message);
       }
     } catch (error) {
-      console.error('Error during signup:', error);
-      alert('An error occurred. Please try again.');
+      console.error("Error during signup:", error);
+      alert("An error occurred. Please try again.");
     }
   };
 
@@ -54,7 +54,9 @@ export const Signup = () => {
       <form className="signup-form" onSubmit={handleSubmit}>
         {/* Name Field */}
         <div className="form-group">
-          <label htmlFor="name" className="form-label">Name:</label>
+          <label htmlFor="name" className="form-label">
+            Name:
+          </label>
           <input
             type="text"
             id="name"
@@ -68,7 +70,9 @@ export const Signup = () => {
 
         {/* Email Field */}
         <div className="form-group">
-          <label htmlFor="email" className="form-label">Email:</label>
+          <label htmlFor="email" className="form-label">
+            Email:
+          </label>
           <input
             type="email"
             id="email"
@@ -82,7 +86,9 @@ export const Signup = () => {
 
         {/* Password Field */}
         <div className="form-group">
-          <label htmlFor="password" className="form-label">Password:</label>
+          <label htmlFor="password" className="form-label">
+            Password:
+          </label>
           <input
             type="password"
             id="password"
@@ -96,7 +102,9 @@ export const Signup = () => {
 
         {/* Phone Field */}
         <div className="form-group">
-          <label htmlFor="phone" className="form-label">Phone:</label>
+          <label htmlFor="phone" className="form-label">
+            Phone:
+          </label>
           <input
             type="text"
             id="phone"
@@ -110,7 +118,9 @@ export const Signup = () => {
 
         {/* Address Field */}
         <div className="form-group">
-          <label htmlFor="address" className="form-label">Address:</label>
+          <label htmlFor="address" className="form-label">
+            Address:
+          </label>
           <textarea
             id="address"
             name="address"

@@ -13,13 +13,11 @@ export const createEvent = async (req, res) => {
   try {
     const newEvent = new Event({ name, about, date, time, venue, clubId });
     await newEvent.save();
-    res
-      .status(201)
-      .json({
-        success: true,
-        message: "Event created successfully",
-        data: newEvent,
-      });
+    res.status(201).json({
+      success: true,
+      message: "Event created successfully",
+      data: newEvent,
+    });
   } catch (error) {
     console.error("Error creating event:", error.message);
     res

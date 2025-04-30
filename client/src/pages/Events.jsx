@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import './Events.css';
+import React, { useEffect, useState } from "react";
+import "./Events.css";
 
 export const Events = () => {
   const [events, setEvents] = useState([]);
@@ -31,8 +31,12 @@ export const Events = () => {
 
   // Separate events into upcoming and past
   const currentDate = new Date();
-  const upcomingEvents = events.filter((event) => new Date(event.date) >= currentDate);
-  const pastEvents = events.filter((event) => new Date(event.date) < currentDate);
+  const upcomingEvents = events.filter(
+    (event) => new Date(event.date) >= currentDate
+  );
+  const pastEvents = events.filter(
+    (event) => new Date(event.date) < currentDate
+  );
 
   return (
     <div className="events-container">
@@ -53,7 +57,8 @@ export const Events = () => {
                   <h3 className="event-name">{event.name}</h3>
                   <p className="event-about">{event.about}</p>
                   <p className="event-details">
-                    <strong>Date:</strong> {new Date(event.date).toLocaleDateString()} <br />
+                    <strong>Date:</strong>{" "}
+                    {new Date(event.date).toLocaleDateString()} <br />
                     <strong>Time:</strong> {event.time} <br />
                     <strong>Venue:</strong> {event.venue}
                   </p>
@@ -88,5 +93,3 @@ export const Events = () => {
 };
 
 export default Events;
-
-
