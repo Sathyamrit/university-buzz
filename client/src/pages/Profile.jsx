@@ -125,77 +125,123 @@ export const Profile = () => {
   }
 
   return (
-    <div className="profile-container">
-      {/* Profile Section */}
-      <div className="profile-details">
-        <h3>Profile</h3>
-        <p>
-          <strong>Name:</strong> {user.name}
-        </p>
-        <p>
-          <strong>Email:</strong> {user.email}
-        </p>
-        <p>
-          <strong>Phone:</strong> {user.phone}
-        </p>
-        <p>
-          <strong>Address:</strong> {user.address}
-        </p>
-        <p>
-          <strong>Posts:</strong> {posts.length}
-        </p>
-      </div>
-
-      {/* Add Post Section */}
-      <div className="add-post-section">
-        <h3 className="add-post-title">Add a Post</h3>
-        <textarea
-          className="post-input"
-          placeholder="Write something..."
-          value={newPost}
-          onChange={(e) => setNewPost(e.target.value)}
-        />
-        <button className="add-post-button" onClick={handleAddPost}>
-          Add Post
-        </button>
-      </div>
-
-      {/* Posts Section */}
-      <div className="posts-section">
-        <h3 className="posts-title">Your Posts</h3>
-        {posts.length === 0 ? (
-          <p className="no-posts">You haven't added any posts yet.</p>
-        ) : (
-          posts.map((post) => (
-            <div key={post._id} className="post-item">
-              <p>
-                <strong>{post.title}:</strong> {post.content}
-              </p>
-              <div className="post-actions">
-                <button
-                  className="delete-button"
-                  onClick={() => handleDeletePost(post._id)}
-                >
-                  🗑️ Delete
-                </button>
+    <div className="backgroundColoring">
+      <div className="profile-container">
+        {/* Profile Section */}
+        <div className="profile-details">
+          <div className="profile-picture">
+            <img
+              src="https://placehold.co/100x100"
+              alt="Profile"
+              className="profile-avatar"
+            ></img>
+          </div>
+          <div className="profile-info">
+            <div className="profile-info h3">
+              <div className="profile-info p">
+                <div className="profile-title">
+                  <h3>Profile</h3>
+                  <p>
+                    <strong>Name:</strong> {user.name}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {user.email}
+                  </p>
+                  <p>
+                    <strong>Phone:</strong> {user.phone}
+                  </p>
+                  <p>
+                    <strong>Address:</strong> {user.address}
+                  </p>
+                  <p>
+                    <strong>Posts:</strong> {posts.length}
+                  </p>
+                </div>
               </div>
             </div>
-          ))
-        )}
-      </div>
+          </div>
+        </div>
 
-      {/* Joined Clubs Section */}
-      <div className="joined-clubs-section">
-        <h3>Joined Clubs</h3>
-        {user.joinedClubs.length === 0 ? (
-          <p>You haven't joined any clubs yet.</p>
-        ) : (
-          <ul>
-            {user.joinedClubs.map((club) => (
-              <li key={club._id}>{club.name}</li> // Add a unique key prop
-            ))}
-          </ul>
-        )}
+        {/* Add Post Section */}
+        <div className="add-post-section">
+          <h3 className="add-post-title">Add a Post</h3>
+          <textarea
+            className="post-input"
+            placeholder="Write something..."
+            value={newPost}
+            onChange={(e) => setNewPost(e.target.value)}
+          />
+          <button className="add-post-button" onClick={handleAddPost}>
+            Add Post
+          </button>
+        </div>
+
+        {/* Posts Section */}
+        <div className="posts-section">
+          <h3 className="posts-title">Your Posts</h3>
+          {posts.length === 0 ? (
+            <p className="no-posts">You haven't added any posts yet.</p>
+          ) : (
+            posts.map((post) => (
+              <div key={post._id} className="post-item">
+                <p>
+                  <strong>{post.title}:</strong> {post.content}
+                </p>
+                <div className="post-actions">
+                  <button
+                    className="delete-button"
+                    onClick={() => handleDeletePost(post._id)}
+                  >
+                    🗑️ Delete
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* Joined Clubs Section */}
+        <div className="joined-clubs">
+          <h3 className="joined-clubs-title">Joined Clubs</h3>
+          <div>
+            {user.joinedClubs.length === 0 ? (
+              <p>You haven't joined any clubs yet.</p>
+            ) : (
+              <ul>
+                {user.joinedClubs.map((club) => (
+                  <li key={club._id} className="club-badge">
+                    {club.name}
+                  </li> // Add a unique key prop
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+
+        <div class="footer">
+          <div class="footer-column">
+            <h4>UniversityBuzz</h4>
+            <p>
+              Connecting university students through shared interests and
+              collaborative opportunities.
+            </p>
+          </div>
+          <div class="footer-column">
+            <h4>Quick Links</h4>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/events">Events</a>
+          </div>
+          <div class="footer-column">
+            <h4>Connect With Us</h4>
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          © 2025 UniversityBuzz. All rights reserved.
+        </div>
       </div>
     </div>
   );

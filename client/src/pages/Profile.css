@@ -1,85 +1,136 @@
+.backgroundColoring {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  /* background: linear-gradient(to bottom, #f9f9f9, #eaeaea); */
+  background: linear-gradient(to bottom, #eff6ff, #e8e4fd);
+}
+
 .profile-container {
-  max-width: 800px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 1450px; /* Center the profile container */
+  margin: 30px auto;
   padding: 20px;
+  background-color: #f9f9ff; /* Light purple background */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .profile-details {
-  background-color: #f9f9f9;
+  background-color: #ffffff; /* White background for profile details */
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 12px; /* Rounded corners */
   margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Space between profile picture and details */
+}
+
+.profile-picture {
+  width: 100px; /* Larger profile picture */
+  height: 100px;
+  border-radius: 50%; /* Circular profile picture */
+  background-color: #ddd; /* Placeholder background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px; /* Placeholder text size */
+  color: #6c63ff; /* Placeholder text color */
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-info h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333; /* Darker text color */
+}
+
+.profile-info p {
+  font-size: 16px;
+  color: #555; /* Medium gray text */
+  margin: 5px 0;
 }
 
 .profile-title {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  color: #6c63ff; /* Darker text color */
 }
 
 .add-post-section {
-  background-color: #f9f9f9;
+  background-color: #ffffff; /* White background for add post */
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .add-post-title {
-  font-size: 20px;
+  font-size: 21px;
   font-weight: bold;
   margin-bottom: 10px;
+  color: #333; /* Darker text color */
 }
 
 .post-input {
   width: 100%;
-  height: 80px;
+  height: 120px;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px; /* Rounded corners */
   margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 16px;
+  background-color: #f9f9ff; /* Light purple background */
 }
 
 .add-post-button {
-  background-color: #007bff;
+  background-color: #6c63ff; /* Purple button */
   color: #fff;
   border: none;
   padding: 10px 15px;
-  border-radius: 4px;
+  border-radius: 8px; /* Rounded corners */
   cursor: pointer;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .add-post-button:hover {
-  background-color: #0056b3;
+  background-color: #4b4bff; /* Darker purple on hover */
 }
 
 .posts-section {
-  background-color: #f9f9f9;
+  background-color: #ffffff; /* White background for posts */
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .posts-title {
-  font-size: 20px;
+  font-size: 21px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  color: #333; /* Darker text color */
 }
 
 .no-posts {
   color: #777;
-  font-size: 14px;
+  font-size: 16px; /* Slightly larger font size */
+  text-align: center;
 }
 
 .post-item {
-  background-color: #fff;
-  padding: 10px;
+  background-color: #f9f9ff; /* Light purple background for posts */
+  padding: 15px;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-bottom: 10px;
+  border-radius: 8px; /* Rounded corners */
+  margin-bottom: 15px;
+  height: 110px;
 }
 
 .post-actions {
@@ -90,23 +141,117 @@
 
 .like-button,
 .delete-button {
-  background-color: #007bff;
+  background-color: #6c63ff; /* Purple buttons */
   color: #fff;
   border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
+  padding: 8px 12px;
+  border-radius: 8px; /* Rounded corners */
   cursor: pointer;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .like-button:hover {
-  background-color: #0056b3;
+  background-color: #4b4bff; /* Darker purple on hover */
 }
 
 .delete-button {
-  background-color: #dc3545;
+  background-color: #dc3545; /* Red button */
 }
 
 .delete-button:hover {
-  background-color: #a71d2a;
+  background-color: #a71d2a; /* Darker red on hover */
+}
+
+.joined-clubs {
+  background-color: #ffffff; /* White background for the section */
+  padding: 20px;
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin-top: 20px; /* Space above the section */
+  text-align: center; /* Center-align content */
+}
+
+.joined-clubs-title {
+  font-size: 21px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333; /* Darker text color */
+}
+
+.club-badge {
+  display: inline-block;
+  background-color: #6c63ff; /* Purple background */
+  color: #fff; /* White text */
+  padding: 8px 12px;
+  border-radius: 20px; /* Rounded pill shape */
+  font-size: 14px;
+  margin: 5px; /* Space between badges */
+  text-decoration: none;
+  opacity: 0.9;
+  font-weight: bold;
+}
+
+.club-badge:nth-child(2) {
+  background-color: #ed8fb8; /* Pink background for variety */
+}
+
+.club-badge:nth-child(3) {
+  background-color: #63b3ff; /* Blue background for variety */
+}
+
+.club-badge:nth-child(4) {
+  background-color: #ec7178; /* Blue background for variety */
+}
+
+.club-badge:nth-child(5) {
+  background-color: #e6dc54; /* Blue background for variety */
+}
+
+.club-badge:nth-child(6) {
+  background-color: #b2fdc9; /* Blue background for variety */
+}
+
+.footer {
+  background-color: #ffffff; /* White background */
+  padding: 20px;
+  border-top: 1px solid #ddd; /* Subtle border at the top */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap; /* Ensure responsiveness */
+  margin-top: 30px; /* Space above the footer */
+}
+
+.footer-column {
+  flex: 1;
+  margin: 10px;
+}
+
+.footer-column h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #6c63ff; /* Darker text color */
+}
+
+.footer-column p,
+.footer-column a {
+  font-size: 14px;
+  color: #555; /* Medium gray text */
+  text-decoration: none;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.footer-column a:hover {
+  color: #6c63ff; /* Purple hover effect */
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 14px;
+  color: #777; /* Lighter gray text */
+  margin-top: 20px;
+  border-top: 1px solid #ddd; /* Subtle border above the copyright */
+  padding-top: 10px;
 }
