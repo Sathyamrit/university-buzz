@@ -64,8 +64,10 @@ export const Clubs = () => {
       const data = await response.json();
 
       if (data.success) {
-        // Update the localStorage with the updated user data
-        localStorage.setItem("user", JSON.stringify(data.data));
+        // Preserve the user's type when updating localStorage
+        const updatedUser = { ...user, ...data.data, type: user.type };
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+
         setClubs((prevClubs) =>
           prevClubs.map((club) =>
             club._id === clubId ? { ...club, joined: true } : club
@@ -86,7 +88,7 @@ export const Clubs = () => {
   }
 
   return (
-    <div>
+    <div className="backgroundColoring">
       {/* Hero Section */}
       <div className="hero-section">
         <h1 className="hero-title">Discover University Clubs & Societies</h1>
@@ -103,7 +105,11 @@ export const Clubs = () => {
         ) : (
           clubs.map((club) => (
             <div key={club._id} className="club-card">
-              <img src={club.image} alt={club.name} className="club-image" />
+              <img 
+                src="https://placehold.co/600x400"
+                alt={club.name} 
+                className="club-image" 
+                />
               <div className="club-content">
                 <h3 className="club-name">{club.name}</h3>
                 <p className="club-description">{club.description}</p>

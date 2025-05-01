@@ -6,6 +6,7 @@
   background-color: #fff;
   border-bottom: 1px solid #ddd;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow at the bottom */
+  height: 5em;
 }
 
 .navbar-component-logo-text {
