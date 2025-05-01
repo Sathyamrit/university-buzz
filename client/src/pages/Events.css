@@ -7,17 +7,18 @@ body {
 }
 
 .backgroundColoring {
-  background: linear-gradient(
-    to bottom,
-    #eff6ff,
-    #e8e4fd
-  ); /* Light blue to light purple gradient */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-height: 100vh;
-  height: auto;
+  /* background: linear-gradient(to bottom, #f9f9f9, #eaeaea); */
+  background: linear-gradient(to bottom, #eff6ff, #e8e4fd);
 }
 
 /* Hero Section */
 .hero-section {
+  width: 100%;
   background-color: #f3e8ff; /* Light purple background */
   border-radius: 12px;
   padding: 40px 20px; /* Increased padding for better spacing */
@@ -33,6 +34,7 @@ body {
 }
 
 .events-container {
+  width: 100%;
   display: flex;
   flex-direction: column; /* Stack events vertically */
   max-width: 1480px;
