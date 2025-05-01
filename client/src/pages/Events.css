@@ -1,10 +1,19 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
 .backgroundColoring {
   background: linear-gradient(
     to bottom,
     #eff6ff,
     #e8e4fd
   ); /* Light blue to light purple gradient */
-  height: 110vh;
+  min-height: 100vh;
+  height: auto;
 }
 
 /* Hero Section */
@@ -24,8 +33,9 @@
 }
 
 .events-container {
+  display: flex;
+  flex-direction: column; /* Stack events vertically */
   max-width: 1480px;
-  height: 80vh;
   margin: 30px auto;
   padding: 20px;
   background-color: #f9f9ff; /* Light background for the container */
@@ -85,12 +95,6 @@
 
 .event-details svg {
   color: #6c63ff; /* Purple color for icons */
-}
-
-.past-events {
-  border-radius: 12px; /* Rounded corners */
-  margin-top: 20px; /* Increased spacing */
-  height: 50vh;
 }
 
 .no-events-past {
