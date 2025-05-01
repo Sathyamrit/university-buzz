@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import Footer from "../components/Footer";
 
 export const Login = () => {
   const [formData, setFormData] = useState({
@@ -56,71 +57,83 @@ export const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <h2 className="login-title">Login</h2>
-      <form className="login-form" onSubmit={handleSubmit}>
-        {/* Login Type Selector */}
-        <div className="form-group">
-          <label htmlFor="type" className="form-label">
-            Login as:
-          </label>
-          <select
-            id="type"
-            name="type"
-            value={formData.type}
-            onChange={handleChange}
-            className="form-input"
-          >
-            <option value="user">User</option>
-            <option value="club">Club</option>
-          </select>
+    <div className="login-page-container">
+      <div className="login-page-header-box">
+        <h1 className="login-page-header-title">University Buzz</h1>
+        <p className="login-page-header-subtitle">
+          Connect with your campus community and access all your university resources in one place
+        </p>
+      </div>
+
+      <div className="login-page-card">
+        <div className="login-page-header">
+          <div className="login-page-icon">🔑</div>
+          <h2 className="login-page-title">Welcome Back!</h2>
+          <p className="login-page-subtitle">Sign in to your account to continue</p>
         </div>
+        <form className="login-page-form" onSubmit={handleSubmit}>
+          <div className="login-page-form-group">
+            <label htmlFor="type" className="login-page-form-label">Login as:</label>
+            <select id="type" name="type" value={formData.type} onChange={handleChange} className="login-page-form-input">
+              <option value="user">User</option>
+              <option value="club">Club</option>
+            </select>
+          </div>
 
-        {/* Username Field */}
-        <div className="form-group">
-          <label htmlFor="username" className="form-label">
-            Username:
-          </label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-            className="form-input"
-          />
-        </div>
+          {/* Username Field */}
+          <div className="login-page-form-label, login-page-form-group">
+            <label htmlFor="username" className="login-page-form-label">
+              Username:
+            </label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Enter your username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
 
-        {/* Password Field */}
-        <div className="form-group">
-          <label htmlFor="password" className="form-label">
-            Password:
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            className="form-input"
-          />
-        </div>
+          {/* Password Field */}
+          <div className="login-page-form-label, login-page-form-group">
+            <label htmlFor="password" className="login-page-form-label">
+              Password:
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
 
-        {/* Submit Button */}
-        <button type="submit" className="form-button">
-          Login
-        </button>
-      </form>
+          {/* Submit Button */}
+          <button type="submit" className="form-button">
+            Sign In
+          </button>
+        </form>
 
-      {/* Redirect to Signup */}
-      <p className="redirect-text">
-        Don't have an account?{" "}
-        <span className="signup-link" onClick={() => navigate("/signup")}>
-          Sign up
-        </span>
-      </p>
+        {/* Redirect to Signup */}
+        <p className="redirect-text">
+          Don't have an account?{" "}
+          <span className="signup-link" onClick={() => navigate("/signup")}>
+            Sign up
+          </span>
+        </p>
+        <p className="forgot-password">
+          <span onClick={() => alert("Forgot password functionality coming soon!")}>
+            Forgot password?
+          </span>
+        </p>
+      </div>
+      <Footer />
     </div>
   );
 };

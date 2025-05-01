@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Footer from "../components/Footer";
 import "./Signup.css";
 
 export const Signup = () => {
@@ -49,93 +50,96 @@ export const Signup = () => {
   };
 
   return (
-    <div className="signup-container">
-      <h2 className="signup-title">Signup</h2>
-      <form className="signup-form" onSubmit={handleSubmit}>
-        {/* Name Field */}
-        <div className="form-group">
-          <label htmlFor="name" className="form-label">
-            Name:
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="form-input"
-          />
-        </div>
+    <div className="signup-page">
+      <div className="signup-container">
+        <h2 className="signup-title">Signup</h2>
+        <form className="signup-form" onSubmit={handleSubmit}>
+          {/* Name Field */}
+          <div className="form-group">
+            <label htmlFor="name" className="form-label">
+              Name:
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
 
-        {/* Email Field */}
-        <div className="form-group">
-          <label htmlFor="email" className="form-label">
-            Email:
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="form-input"
-          />
-        </div>
+          {/* Email Field */}
+          <div className="form-group">
+            <label htmlFor="email" className="form-label">
+              Email:
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
 
-        {/* Password Field */}
-        <div className="form-group">
-          <label htmlFor="password" className="form-label">
-            Password:
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            className="form-input"
-          />
-        </div>
+          {/* Password Field */}
+          <div className="form-group">
+            <label htmlFor="password" className="form-label">
+              Password:
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
 
-        {/* Phone Field */}
-        <div className="form-group">
-          <label htmlFor="phone" className="form-label">
-            Phone:
-          </label>
-          <input
-            type="text"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-            className="form-input"
-          />
-        </div>
+          {/* Phone Field */}
+          <div className="form-group">
+            <label htmlFor="phone" className="form-label">
+              Phone:
+            </label>
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
 
-        {/* Address Field */}
-        <div className="form-group">
-          <label htmlFor="address" className="form-label">
-            Address:
-          </label>
-          <textarea
-            id="address"
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-            required
-            className="form-textarea"
-          />
-        </div>
+          {/* Address Field */}
+          <div className="form-group">
+            <label htmlFor="address" className="form-label">
+              Address:
+            </label>
+            <textarea
+              id="address"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              required
+              className="form-textarea"
+            />
+          </div>
 
-        {/* Submit Button */}
-        <button type="submit" className="form-button">
-          Signup
-        </button>
-      </form>
+          {/* Submit Button */}
+          <button type="submit" className="form-button">
+            Signup
+          </button>
+        </form>
+      </div>
+      <Footer />
     </div>
   );
 };

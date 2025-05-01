@@ -1,6 +1,78 @@
-/* #root {
-  max-width: 1280px;
+/* Reset Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Layout Styles */
+.container {
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 20px;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-center {
   text-align: center;
-} */
+}
+
+/* Utility Classes */
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.p-10 {
+  padding: 10px;
+}
+
+.bg-light {
+  background-color: #f9f9f9;
+}
+
+.bg-dark {
+  background-color: #333;
+  color: #fff;
+}
+
+.text-primary {
+  color: #6c63ff;
+}
+
+.text-secondary {
+  color: #777;
+}

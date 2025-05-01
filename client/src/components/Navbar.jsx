@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for programmatic navigation
-import './Navbar.css'; // Optional: Add custom styles for the navbar
+import { Link, useNavigate } from 'react-router-dom';
+import './Navbar.css';
 
 export const Navbar = () => {
   const user = JSON.parse(localStorage.getItem('user')); // Retrieve user data from localStorage
@@ -13,35 +13,33 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-logo">
-        <Link to="/">
-          <img src="/logo.png" alt="University Buzz Logo" className="logo" />
+    <nav className="navbar-component">
+      <div className="navbar-component-logo">
+        <Link to="/" className="navbar-component-logo-link">
+          <span className="navbar-component-logo-text">UniversityBuzz</span>
         </Link>
       </div>
 
-      <div className="navbar-links">
-        <Link to="/" className="nav-link">Home</Link>
+      <div className="navbar-component-links">
+        <Link to="/" className="navbar-component-link">Home</Link>
         {user?.type === 'user' ? (
-          <Link to="/clubs" className="nav-link">Clubs</Link>
+          <Link to="/clubs" className="navbar-component-link">Clubs</Link>
         ) : (
-          <Link to="/about" className="nav-link">About</Link>
+          <Link to="/about" className="navbar-component-link">About</Link>
         )}
-        <Link to="/events" className="nav-link">Events</Link>
+        <Link to="/events" className="navbar-component-link">Events</Link>
       </div>
 
       <div className="navbar-actions">
         {!user ? (
           <>
-            <Link to="/signup">Signup</Link>
-            <Link to="/login">Login</Link>
+            <Link to="/signup" className="auth-link">Signup</Link>
+            <Link to="/login" className="auth-link">Login</Link>
           </>
         ) : (
           <>
-            <Link to={profileLink}>
-              <button className="profile-btn" aria-label="Profile">
-                👤
-              </button>
+            <Link to={profileLink} className="profile-link">
+              <span>👤 Account</span>
             </Link>
             <button onClick={handleLogout} className="logout-btn">
               Logout

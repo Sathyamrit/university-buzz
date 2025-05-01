@@ -1,45 +1,112 @@
+.navbar-component {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.navbar-component-logo-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #6c63ff;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #f8f9fa;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  font-family: Arial, sans-serif;
 }
 
-.navbar-logo .logo {
-  height: 40px;
-  cursor: pointer;
-}
-
-.navbar-links {
-  display: flex;
-  gap: 20px;
-}
-
-.nav-link {
+.navbar-logo .logo-link {
   text-decoration: none;
-  color: #333;
-  font-weight: 500;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .nav-link:hover {
-  color: #007bff;
+  color: #6c63ff;.navbar-links {
 }
 
 .navbar-actions {
   display: flex;
-  gap: 15px;
+  align-items: center;nav-link {
+  gap: 15px;  text-decoration: none;
 }
 
-.navbar-actions button {
+.notification-btn {500;
   background: none;
   border: none;
-  cursor: pointer;
-  font-size: 20px;
-  color: #333;
+  font-size: 18px;
+  cursor: pointer; color: #6c63ff;
+  position: relative;}
+}
+s {
+.notification-btn::after {
+  content: '';ms: center;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 8px;
+  height: 8px;
+  background-color: red; border: none;
+  border-radius: 50%;  font-size: 18px;
+}inter;
+
+.auth-link {
+  text-decoration: none;
+  color: #6c63ff;after {
+  font-size: 14px; content: '';
+  font-weight: 500;  position: absolute;
 }
 
-.navbar-actions button:hover {
-  color: #007bff;
+.auth-link:hover { width: 8px;
+  text-decoration: underline;  height: 8px;
+}lor: red;
+
+.profile-link {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px; text-decoration: none;
+  font-weight: 500;  color: #6c63ff;
+}
+0;
+.profile-link:hover {
+  color: #6c63ff;
+}ver {
+underline;
+.logout-btn {
+  background: none;
+  border: none;
+  color: #333;none;
+  font-size: 14px;
+  font-weight: 500; font-size: 14px;
+  cursor: pointer;  font-weight: 500;
+}
+
+.logout-btn:hover {profile-link:hover {
+
+
+}  color: #6c63ff;  color: #6c63ff;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  color: #6c63ff;
 }

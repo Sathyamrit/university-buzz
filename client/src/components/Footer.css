@@ -1,0 +1,155 @@
+.footer-component {
+  width: 100%;
+  background-color: #f9f9f9;
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
+}
+
+.footer-component-logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #aa29c6;
+}
+
+.footer {
+  width: 100%;
+  background-color: #f9f9f9;
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  flex-wrap: wrap;
+  border-bottom: solid 1px rgb(169, 155, 155);
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 150px;
+  margin: 10px;
+}
+
+.footer-logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #aa29c6;
+}
+
+.footer-description {
+  font-size: 14px;
+  color: #777;
+  margin-top: 5px;
+}
+
+.footer-section h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #4a4a4a;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 5px;
+}
+
+.footer-section ul li a {
+  text-decoration: none;
+  color: #555;
+  font-size: 14px;
+}
+
+.footer-section ul li a:hover {
+  text-decoration: underline;
+  color: #000;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #777;
+}
+
+.footer-unique {
+  width: 100%;
+  background-color: #f9f9f9;
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
+  font-family: Arial, sans-serif;
+}
+
+.footer-unique-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  flex-wrap: wrap;
+}
+
+.footer-unique-section {
+  flex: 1;
+  min-width: 150px;
+  margin: 10px;
+}
+
+.footer-unique-brand {
+  flex: 2;
+}
+
+.footer-unique-logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #6c63ff;
+}
+
+.footer-unique-description {
+  font-size: 14px;
+  color: #777;
+  margin-top: 5px;
+}
+
+.footer-unique-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #4a4a4a;
+}
+
+.footer-unique-list {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-unique-list li {
+  margin-bottom: 5px;
+}
+
+.footer-unique-link {
+  text-decoration: none;
+  color: #555;
+  font-size: 14px;
+}
+
+.footer-unique-link:hover {
+  text-decoration: underline;
+  color: #000;
+}
+
+.footer-unique-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #777;
+}

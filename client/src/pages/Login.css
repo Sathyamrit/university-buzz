@@ -1,69 +1,135 @@
-.login-container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-}
-
-.login-title {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.login-form {
+.login-page-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #f9f9f9, #eaeaea);
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.form-input {
+.login-page-header-box {
+  text-align: center;
+  margin: 30px 30px 30px 30px; /* top right bottom left*/
+  max-width: 400px;
   width: 100%;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.login-page-header-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #6c63ff;
+}
+
+.login-page-header-subtitle {
+  font-size: 16px;
+  color: #555;
+  margin-top: 5px;
+}
+
+.login-page-card {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border: 1px solid #ddd; /* Light border for the box */
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto; /* Center the card horizontally */
+  margin-bottom: 5em; /* Space below the card */
+}
+
+.login-page-header {
+  margin-bottom: 20px;
+}
+
+.login-page-icon {
+  font-size: 40px;
+  color: #6c63ff;
+}
+
+.login-page-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.login-page-subtitle {
   font-size: 14px;
+  color: #777;
+}
+
+/* Form Styles */
+.login-page-form {
+  margin-top: 20px;
+}
+
+.login-page-form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.login-page-form-label {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.login-page-form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+.login-page-form-input:focus {
+  border-color: #6c63ff;
+  outline: none;
 }
 
 .form-button {
-  background-color: #007bff;
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(to right, #6c63ff, #574bff);
   color: #fff;
   border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 5px;
   font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
 .form-button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(to right, #574bff, #6c63ff);
 }
 
 .redirect-text {
-  text-align: center;
   margin-top: 15px;
   font-size: 14px;
+  color: #555;
 }
 
 .signup-link {
-  color: #007bff;
+  color: #6c63ff;
   cursor: pointer;
-  text-decoration: underline;
 }
 
 .signup-link:hover {
-  color: #0056b3;
+  text-decoration: underline;
+}
+
+.forgot-password {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #777;
+  cursor: pointer;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
 }
