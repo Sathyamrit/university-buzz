@@ -89,7 +89,7 @@ export const Login = () => {
               type="text"
               id="username"
               name="username"
-              placeholder="Enter your username"
+              placeholder="Enter your email"
               value={formData.username}
               onChange={handleChange}
               required
