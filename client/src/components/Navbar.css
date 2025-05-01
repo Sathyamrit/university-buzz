@@ -5,97 +5,72 @@
   padding: 10px 20px;
   background-color: #fff;
   border-bottom: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow at the bottom */
 }
 
 .navbar-component-logo-text {
   font-size: 20px;
   font-weight: bold;
-  color: #6c63ff;
+  background: #6c63ff; 
+  -webkit-background-clip: text; /* Clip the background to the text */
+  -webkit-text-fill-color: transparent; /* Make the text transparent to show the gradient */
 }
 
-.navbar {
+.navbar-component-links{
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
-  font-family: Arial, sans-serif;
+  gap: 20px; /* Adds spacing between logo and links */
 }
 
-.navbar-logo .logo-link {
-  text-decoration: none;
+.navbar-links {
+  display: flex;
+  gap: 20px; /* Adds spacing between links */
 }
 
-.logo-text {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.nav-link:hover {
-  color: #6c63ff;.navbar-links {
+.navbar-links .nav-link:not(:last-child)::after {
+  content: "|"; /* Adds a vertical divider between links */
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #ddd;
 }
 
 .navbar-actions {
   display: flex;
-  align-items: center;nav-link {
-  gap: 15px;  text-decoration: none;
+  align-items: center;
+  gap: 15px;
 }
 
-.notification-btn {500;
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer; color: #6c63ff;
-  position: relative;}
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
 }
-s {
-.notification-btn::after {
-  content: '';ms: center;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 8px;
-  height: 8px;
-  background-color: red; border: none;
-  border-radius: 50%;  font-size: 18px;
-}inter;
+
+.nav-link:hover {
+  color: #6c63ff;
+}
 
 .auth-link {
   text-decoration: none;
-  color: #6c63ff;after {
-  font-size: 14px; content: '';
-  font-weight: 500;  position: absolute;
+  color: #6c63ff;
+  font-size: 14px;
+  font-weight: 500;
 }
 
-.auth-link:hover { width: 8px;
-  text-decoration: underline;  height: 8px;
-}lor: red;
+.auth-link:hover {
+  text-decoration: underline;
+}
 
 .profile-link {
   text-decoration: none;
   color: #333;
-  font-size: 14px; text-decoration: none;
-  font-weight: 500;  color: #6c63ff;
+  font-size: 14px;
+  font-weight: 500;
 }
-0;
+
 .profile-link:hover {
   color: #6c63ff;
-}ver {
-underline;
-.logout-btn {
-  background: none;
-  border: none;
-  color: #333;none;
-  font-size: 14px;
-  font-weight: 500; font-size: 14px;
-  cursor: pointer;  font-weight: 500;
-}
-
-.logout-btn:hover {profile-link:hover {
-
-
-}  color: #6c63ff;  color: #6c63ff;
 }
 
 .logout-btn {

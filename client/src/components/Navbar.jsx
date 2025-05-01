@@ -39,7 +39,7 @@ export const Navbar = () => {
         ) : (
           <>
             <Link to={profileLink} className="profile-link">
-              <span>👤 Account</span>
+              <span>Account</span>
             </Link>
             <button onClick={handleLogout} className="logout-btn">
               Logout

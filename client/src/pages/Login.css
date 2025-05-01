@@ -4,7 +4,9 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #f9f9f9, #eaeaea);
+  /* background: linear-gradient(to bottom, #f9f9f9, #eaeaea); */
+  background: linear-gradient(to right,#EFF6FF, #E8E4FD );
+
 }
 
 .login-page-header-box {
