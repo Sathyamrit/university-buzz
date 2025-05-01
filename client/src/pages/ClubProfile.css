@@ -87,15 +87,31 @@
 }
 
 .delete-event-button {
-  background-color: #dc3545;
-  color: #fff;
+  background-color: #ff4d4d;
+  color: white;
   border: none;
   padding: 5px 10px;
-  border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
+  border-radius: 5px;
+  margin-top: 10px;
 }
 
 .delete-event-button:hover {
-  background-color: #a71d2a;
+  background-color: #ff1a1a;
+}
+
+.delete-post-button,
+.delete-event-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.delete-post-button:hover,
+.delete-event-button:hover {
+  background-color: #ff1a1a;
 }

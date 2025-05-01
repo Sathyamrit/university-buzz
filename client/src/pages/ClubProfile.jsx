@@ -92,6 +92,27 @@ export const ClubProfile = () => {
     }
   };
 
+  // Handle deleting an event
+  const handleDeleteEvent = async (eventId) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/events/${eventId}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      if (data.success) {
+        setEvents(events.filter((event) => event._id !== eventId)); // Remove the deleted event from state
+      } else {
+        alert("Failed to delete event: " + data.message);
+      }
+    } catch (error) {
+      console.error("Error deleting event:", error);
+      alert("An error occurred while deleting the event. Please try again.");
+    }
+  };
+
   // Handle adding a new post
   const handleAddPost = async () => {
     if (newPost.trim() === "") {
@@ -123,6 +144,27 @@ export const ClubProfile = () => {
     } catch (error) {
       console.error("Error adding post:", error);
       alert("An error occurred while adding the post.");
+    }
+  };
+
+  // Handle deleting a post
+  const handleDeletePost = async (postId) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/posts/${postId}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      if (data.success) {
+        setPosts(posts.filter((post) => post._id !== postId)); // Remove the deleted post from state
+      } else {
+        alert("Failed to delete post: " + data.message);
+      }
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      alert("An error occurred while deleting the post. Please try again.");
     }
   };
 
@@ -211,6 +253,12 @@ export const ClubProfile = () => {
               <p>
                 <strong>Venue:</strong> {event.venue}
               </p>
+              <button
+                className="delete-event-button"
+                onClick={() => handleDeleteEvent(event._id)}
+              >
+                Delete Event
+              </button>
             </div>
           ))
         )}
@@ -241,6 +289,12 @@ export const ClubProfile = () => {
               <p>
                 <strong>Post:</strong> {post.content}
               </p>
+              <button
+                className="delete-post-button"
+                onClick={() => handleDeletePost(post._id)}
+              >
+                Delete Post
+              </button>
             </div>
           ))
         )}

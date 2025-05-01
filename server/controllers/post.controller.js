@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Post from "../models/post.model.js";
+import Club from "../models/club.model.js"; // Import the Club model
 
 export const createPost = async (req, res) => {
   const { title, content, email, clubId, type } = req.body;
@@ -13,9 +14,19 @@ export const createPost = async (req, res) => {
   }
 
   try {
+    let postTitle = title || "Untitled Post"; // Default title
+
+    // If the post is created by a club and no title is provided, use the club's name
+    if (type === "club" && !title && clubId) {
+      const club = await Club.findById(clubId); // Fetch the club details
+      if (club) {
+        postTitle = club.name; // Use the club's name as the title
+      }
+    }
+
     // Create a new post object
     const newPost = new Post({
-      title: title || "Untitled Post", // Default title if not provided
+      title: postTitle,
       content,
       email: email || null,
       clubId: clubId || null,

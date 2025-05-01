@@ -52,3 +52,26 @@ export const getAllEvents = async (req, res) => {
       .json({ success: false, message: "Server error", error: error.message });
   }
 };
+
+export const deleteEvent = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ success: false, message: "Invalid event ID" });
+  }
+
+  try {
+    const deletedEvent = await Event.findByIdAndDelete(id);
+    if (!deletedEvent) {
+      return res.status(404).json({ success: false, message: "Event not found" });
+    }
+    res.status(200).json({
+      success: true,
+      message: "Event deleted successfully",
+      data: deletedEvent,
+    });
+  } catch (error) {
+    console.error("Error deleting event:", error.message);
+    res.status(500).json({ success: false, message: "Server error", error: error.message });
+  }
+};
