@@ -83,7 +83,7 @@ export const Login = () => {
           {/* Username Field */}
           <div className="login-page-form-label, login-page-form-group">
             <label htmlFor="username" className="login-page-form-label">
-              Username:
+              Email:
             </label>
             <input
               type="text"
