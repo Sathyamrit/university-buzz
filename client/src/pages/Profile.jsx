@@ -79,7 +79,7 @@ export const Profile = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          title: `Post by ${user.name}`, // Example title
+          title: user.name, // Example title
           content: newPost,
           email: user.email, // Associate the post with the user's email
           type: "user", // Specify the type as 'user'

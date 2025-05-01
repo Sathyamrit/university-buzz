@@ -4,28 +4,25 @@ import "./Home.css";
 export const Home = () => {
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
-  const [events, setEvents] = useState([]); // State to hold events
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
-// Retrieve user data from localStorage
     const loggedInUser = JSON.parse(localStorage.getItem("user"));
     if (loggedInUser) {
       setUser(loggedInUser);
-      fetchUserPosts(); // Fetch posts for the logged-in user
-      fetchEvents(); // Fetch upcoming events
+      fetchUserPosts();
+      fetchEvents();
     } else {
-// Redirect to login if no user is found
       window.location.href = "/login";
     }
   }, []);
 
-// Fetch posts for the logged-in user
   const fetchUserPosts = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/posts"); // Fetch all posts
+      const response = await fetch("http://localhost:5000/api/posts");
       const data = await response.json();
       if (data.success) {
-        setPosts(data.data); // Set all posts from the database
+        setPosts(data.data);
       } else {
         console.error("Failed to fetch posts:", data.message);
       }
@@ -34,13 +31,12 @@ export const Home = () => {
     }
   };
 
-// Fetch upcoming events
   const fetchEvents = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/events"); // Fetch all events
+      const response = await fetch("http://localhost:5000/api/events");
       const data = await response.json();
       if (data.success) {
-        setEvents(data.data); // Set all events from the database
+        setEvents(data.data);
       } else {
         console.error("Failed to fetch events:", data.message);
       }
@@ -57,13 +53,15 @@ export const Home = () => {
     <div className="home-container">
       {/* Left: Profile Box */}
       <div className="profile-box">
-        <h3>Profile</h3>
-        <p>
-          <strong>Name:</strong> {user.name}
-        </p>
-        <p>
-          <strong>Email:</strong> {user.email}
-        </p>
+        <div className="profile-header">
+          <img
+            src="https://placehold.co/100x100"
+            alt="Profile"
+            className="profile-avatar"
+          />
+          <h3 className="profile-name">{user.name}</h3>
+          <p className="profile-email">{user.email}</p>
+        </div>
         <button
           className="view-profile-btn"
           onClick={() => (window.location.href = "/profile")}
@@ -74,7 +72,7 @@ export const Home = () => {
 
       {/* Middle: Post Feed */}
       <div className="post-feed">
-        <h3>Posts</h3>
+        <h3 className="section-title">Posts</h3>
         <div className="post-list">
           {posts.length === 0 ? (
             <p>No posts to display.</p>
@@ -83,12 +81,11 @@ export const Home = () => {
               <div key={post._id} className="post-card">
                 <div className="post-header">
                   <div className="post-avatar">
-                    <img className="post-avatar-img" src="https://placehold.co/45x45"></img>  
-                    {post.img}
+                    <span>{post.title[0]}</span>
                   </div>
                   <div>
                     <h4 className="post-title">{post.title}</h4>
-                    <p className="post-time">Just now</p>
+                    {/* <p className="post-time">Just now</p> */}
                   </div>
                 </div>
                 <p className="post-content">{post.content}</p>
@@ -100,7 +97,7 @@ export const Home = () => {
 
       {/* Right: Upcoming Events */}
       <div className="events-box">
-        <h3>Upcoming Events</h3>
+        <h3 className="section-title">Upcoming Events</h3>
         <ul className="event-list">
           {events.length === 0 ? (
             <p>No upcoming events.</p>
