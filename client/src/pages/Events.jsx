@@ -39,55 +39,59 @@ export const Events = () => {
   );
 
   return (
-    <div className="events-container">
-      <h2 className="events-title">Events</h2>
+    <div className="backgroundColoring">
+      <div className="hero-section">
+        <h1 className="hero-title">Events</h1>
+      </div>
 
-      {loading ? (
-        <p>Loading events...</p>
-      ) : (
-        <>
-          {/* Upcoming Events Section */}
-          <div className="upcoming-events">
-            <h3 className="section-title">Upcoming Events</h3>
-            {upcomingEvents.length === 0 ? (
-              <p className="no-events">No upcoming events available.</p>
-            ) : (
-              upcomingEvents.map((event) => (
-                <div key={event._id} className="event-card">
-                  <h3 className="event-name">{event.name}</h3>
-                  <p className="event-about">{event.about}</p>
-                  <p className="event-details">
-                    <strong>Date:</strong>{" "}
-                    {new Date(event.date).toLocaleDateString()} <br />
-                    <strong>Time:</strong> {event.time} <br />
-                    <strong>Venue:</strong> {event.venue}
-                  </p>
-                </div>
-              ))
-            )}
-          </div>
+      <div className="events-container">
+        {loading ? (
+          <p>Loading events...</p>
+        ) : (
+          <>
+            {/* Upcoming Events Section */}
+            <div className="upcoming-events">
+              <h3 className="section-title">Upcoming Events</h3>
+              {upcomingEvents.length === 0 ? (
+                <p className="no-events">No upcoming events available.</p>
+              ) : (
+                upcomingEvents.map((event) => (
+                  <div key={event._id} className="event-card">
+                    <h3 className="event-name">{event.name}</h3>
+                    <p className="event-about">{event.about}</p>
+                    <p className="event-details">
+                      <strong>Date:</strong>{" "}
+                      {new Date(event.date).toLocaleDateString()} <br />
+                      <strong>Time:</strong> {event.time} <br />
+                      <strong>Venue:</strong> {event.venue}
+                    </p>
+                  </div>
+                ))
+              )}
+            </div>
 
-          {/* Past Events Section */}
-          <div className="past-events">
-            <h3 className="section-title">Past Events</h3>
-            {pastEvents.length === 0 ? (
-              <p className="no-events">No past events available.</p>
-            ) : (
-              pastEvents.map((event) => (
-                <div key={event.id} className="event-card">
-                  <h3 className="event-name">{event.name}</h3>
-                  <p className="event-about">{event.about}</p>
-                  <p className="event-details">
-                    <strong>Date:</strong> {event.date} <br />
-                    <strong>Time:</strong> {event.time} <br />
-                    <strong>Venue:</strong> {event.venue}
-                  </p>
-                </div>
-              ))
-            )}
-          </div>
-        </>
-      )}
+            {/* Past Events Section */}
+            <div className="past-events">
+              <h3 className="section-title">Past Events</h3>
+              {pastEvents.length === 0 ? (
+                <p className="no-events-past">No past events available.</p>
+              ) : (
+                pastEvents.map((event) => (
+                  <div key={event.id} className="event-card">
+                    <h3 className="event-name">{event.name}</h3>
+                    <p className="event-about">{event.about}</p>
+                    <p className="event-details">
+                      <strong>Date:</strong> {event.date} <br />
+                      <strong>Time:</strong> {event.time} <br />
+                      <strong>Venue:</strong> {event.venue}
+                    </p>
+                  </div>
+                ))
+              )}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };
