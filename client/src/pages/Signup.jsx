@@ -50,9 +50,9 @@ export const Signup = () => {
   };
 
   return (
-    <div className="signup-page">
+    <div className="background-coloring">
       <div className="signup-container">
-        <h2 className="signup-title">Signup</h2>
+        <h2 className="signup-title">Create Account</h2>
         <form className="signup-form" onSubmit={handleSubmit}>
           {/* Name Field */}
           <div className="form-group">

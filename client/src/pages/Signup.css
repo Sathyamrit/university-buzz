@@ -1,9 +1,21 @@
+.background-coloring {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  /* background: linear-gradient(to bottom, #f9f9f9, #eaeaea); */
+  background: linear-gradient(to bottom, #eff6ff, #e8e4fd);
+}
 .signup-container {
-  max-width: 400px;
+  width: 100%;
+  max-width: 500px;
   margin: 3em auto; /* first property is top and bottom. second property is left and right, if set to auto centers, or add values to do it manually*/
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
+  background-color: #fff;
+  box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
 .signup-title {
@@ -11,6 +23,7 @@
   margin-bottom: 20px;
   font-size: 24px;
   font-weight: bold;
+  color: #6c63ff;
 }
 
 .signup-form {
