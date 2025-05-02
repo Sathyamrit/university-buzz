@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import Profile from "../models/profile.model.js";
 
 export const createProfile = async (req, res) => {
