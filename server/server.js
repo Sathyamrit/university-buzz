@@ -11,7 +11,17 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors()); //enable CORS for all routes
+const allowedOrigins = [
+  "http://localhost:3000", // Local development
+  "https://university-buzz.vercel.app/", // Vercel frontend
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true, // Allow cookies if needed
+  })
+);
 
 app.use(express.json()); //middleware to parse JSON data from incoming requests
 
