@@ -23,7 +23,7 @@ export const Profile = () => {
     const fetchPosts = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/posts?email=${user.email}`
+          `${import.meta.env.VITE.API_URI}/posts?email=${user.email}`
         );
         const data = await response.json();
         if (data.success) {
@@ -44,7 +44,7 @@ export const Profile = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:5000/api/profiles/${user._id}/joined-clubs`
+          `${import.meta.env.VITE.API_URI}/api/profiles/${user._id}/joined-clubs`
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

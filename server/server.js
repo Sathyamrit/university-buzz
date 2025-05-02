@@ -13,15 +13,22 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:3000", // Local development
-  "https://university-buzz.vercel.app/", // Vercel frontend
+  "https://university-buzz.vercel.app", // Vercel frontend
 ];
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true, // Allow cookies if needed
-  })
-);
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Allow requests from allowed origins or no origin (e.g., server-to-server requests)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true, // Allow cookies if needed
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json()); //middleware to parse JSON data from incoming requests
 

@@ -23,7 +23,7 @@ export const Signup = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${import.meta.env.API_URI}/api/profiles`, {
+      const response = await fetch(`${import.meta.env.VITE.API_URI}/api/profiles`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
