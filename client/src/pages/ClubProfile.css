@@ -79,13 +79,14 @@
   background-color: #0056b3;
 }
 
-.events-section {
-  background-color: #ffffff;
+.club-events-section {
+  background-color: #ffffff; /* White background */
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 40px auto;
-  margin-bottom: 0px;
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin: 20px auto; /* Center horizontally and add vertical spacing */
+  width: 100%; /* Match the width of other components */
+  max-width: 1500px; /* Ensure it doesn't stretch too wide */
 }
 
 .events-title {

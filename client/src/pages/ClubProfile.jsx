@@ -245,7 +245,7 @@ export const ClubProfile = () => {
         </div>
 
         {/* Events Section */}
-        <div className="events-section">
+        <div className="club-events-section">
           <h3 className="events-title">Upcoming Events</h3>
           {events.length === 0 ? (
             <p className="no-events">No events created yet.</p>
