@@ -124,6 +124,9 @@ export const Profile = () => {
     return <p>Loading...</p>; // Show loading while user data is being retrieved
   }
 
+  // Construct the profile picture path dynamically
+  const profilePicturePath = `/images/profile/${user.name.replace(/\s+/g, " ")}.jpg`;
+
   return (
     <div className="backgroundColoring">
       <div className="profile-container">
@@ -131,33 +134,30 @@ export const Profile = () => {
         <div className="profile-details">
           <div className="profile-picture">
             <img
-              src="https://placehold.co/100x100"
+              src={profilePicturePath}
               alt="Profile"
               className="profile-avatar"
-            ></img>
+              onError={(e) => (e.target.src = "https://placehold.co/100x100")} // Fallback if image is not found
+            />
           </div>
           <div className="profile-info">
-            <div className="profile-info h3">
-              <div className="profile-info p">
-                <div className="profile-title">
-                  <h3>Profile</h3>
-                  <p>
-                    <strong>Name:</strong> {user.name}
-                  </p>
-                  <p>
-                    <strong>Email:</strong> {user.email}
-                  </p>
-                  <p>
-                    <strong>Phone:</strong> {user.phone}
-                  </p>
-                  <p>
-                    <strong>Address:</strong> {user.address}
-                  </p>
-                  <p>
-                    <strong>Posts:</strong> {posts.length}
-                  </p>
-                </div>
-              </div>
+            <div className="profile-title">
+              <h3>Profile</h3>
+              <p>
+                <strong>Name:</strong> {user.name}
+              </p>
+              <p>
+                <strong>Email:</strong> {user.email}
+              </p>
+              <p>
+                <strong>Phone:</strong> {user.phone}
+              </p>
+              <p>
+                <strong>Address:</strong> {user.address}
+              </p>
+              <p>
+                <strong>Posts:</strong> {posts.length}
+              </p>
             </div>
           </div>
         </div>
@@ -211,35 +211,35 @@ export const Profile = () => {
                 {user.joinedClubs.map((club) => (
                   <li key={club._id} className="club-badge">
                     {club.name}
-                  </li> // Add a unique key prop
+                  </li>
                 ))}
               </ul>
             )}
           </div>
         </div>
 
-        <div class="footer">
-          <div class="footer-column">
+        <div className="footer">
+          <div className="footer-column">
             <h4>UniversityBuzz</h4>
             <p>
               Connecting university students through shared interests and
               collaborative opportunities.
             </p>
           </div>
-          <div class="footer-column">
+          <div className="footer-column">
             <h4>Quick Links</h4>
             <a href="/">Home</a>
             <a href="/about">About</a>
             <a href="/events">Events</a>
           </div>
-          <div class="footer-column">
+          <div className="footer-column">
             <h4>Connect With Us</h4>
             <a href="#">Facebook</a>
             <a href="#">Twitter</a>
             <a href="#">Instagram</a>
           </div>
         </div>
-        <div class="footer-bottom">
+        <div className="footer-bottom">
           © 2025 UniversityBuzz. All rights reserved.
         </div>
       </div>

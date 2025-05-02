@@ -12,27 +12,26 @@ export const ClubProfile = () => {
     venue: "",
   });
   const [newPost, setNewPost] = useState("");
+  const [club, setClub] = useState(null); // State to hold the logged-in club's data
 
-  // Handle input change for event form
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewEvent({ ...newEvent, [name]: value });
-  };
-
-  // Fetch events and posts for the logged-in club
+  // Fetch club data from localStorage
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user")); // Retrieve user data from localStorage
-    if (!user || user.type !== "club") {
+    const loggedInClub = JSON.parse(localStorage.getItem("user"));
+    if (!loggedInClub || loggedInClub.type !== "club") {
       console.error("User is not logged in as a club");
       return;
     }
+    setClub(loggedInClub); // Set the logged-in club's data
+  }, []);
 
-    const clubId = user._id; // Extract clubId from the logged-in user's data
+  // Fetch events and posts for the logged-in club
+  useEffect(() => {
+    if (!club) return;
 
     const fetchEvents = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/events/${clubId}`
+          `http://localhost:5000/api/events/${club._id}`
         );
         const data = await response.json();
         if (data.success) {
@@ -46,7 +45,7 @@ export const ClubProfile = () => {
     const fetchPosts = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/posts/club/${clubId}`
+          `http://localhost:5000/api/posts/club/${club._id}`
         );
         const data = await response.json();
         if (data.success) {
@@ -59,7 +58,7 @@ export const ClubProfile = () => {
 
     fetchEvents();
     fetchPosts();
-  }, []);
+  }, [club]);
 
   // Handle adding a new event
   const handleAddEvent = async () => {
@@ -72,14 +71,11 @@ export const ClubProfile = () => {
     )
       return;
 
-    const user = JSON.parse(localStorage.getItem("user"));
-    const clubId = user._id;
-
     try {
       const response = await fetch("http://localhost:5000/api/events", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...newEvent, clubId }),
+        body: JSON.stringify({ ...newEvent, clubId: club._id }),
       });
 
       const data = await response.json();
@@ -120,16 +116,13 @@ export const ClubProfile = () => {
       return;
     }
 
-    const user = JSON.parse(localStorage.getItem("user"));
-    const clubId = user._id;
-
     try {
       const response = await fetch("http://localhost:5000/api/posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           content: newPost,
-          clubId,
+          clubId: club._id,
           type: "club", // Specify the type as 'club'
         }),
       });
@@ -168,20 +161,23 @@ export const ClubProfile = () => {
     }
   };
 
+  if (!club) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div className="club-profile-container">
       {/* Club Profile Section */}
       <div className="club-profile-details">
         <h2 className="club-profile-title">Club Profile</h2>
         <p>
-          <strong>Name:</strong> Programming Club
+          <strong>Name:</strong> {club.name}
         </p>
         <p>
-          <strong>Members:</strong> 126
+          <strong>Members:</strong> {club.members || "N/A"}
         </p>
         <p>
-          <strong>About:</strong> A community of coding enthusiasts working on
-          exciting projects and hosting hackathons.
+          <strong>About:</strong> {club.description || "No description available."}
         </p>
       </div>
 
@@ -193,28 +189,36 @@ export const ClubProfile = () => {
           name="name"
           placeholder="Event Name"
           value={newEvent.name}
-          onChange={handleChange}
+          onChange={(e) =>
+            setNewEvent({ ...newEvent, [e.target.name]: e.target.value })
+          }
           className="event-input"
         />
         <textarea
           name="about"
           placeholder="About the Event"
           value={newEvent.about}
-          onChange={handleChange}
+          onChange={(e) =>
+            setNewEvent({ ...newEvent, [e.target.name]: e.target.value })
+          }
           className="event-textarea"
         />
         <input
           type="date"
           name="date"
           value={newEvent.date}
-          onChange={handleChange}
+          onChange={(e) =>
+            setNewEvent({ ...newEvent, [e.target.name]: e.target.value })
+          }
           className="event-input"
         />
         <input
           type="time"
           name="time"
           value={newEvent.time}
-          onChange={handleChange}
+          onChange={(e) =>
+            setNewEvent({ ...newEvent, [e.target.name]: e.target.value })
+          }
           className="event-input"
         />
         <input
@@ -222,7 +226,9 @@ export const ClubProfile = () => {
           name="venue"
           placeholder="Venue"
           value={newEvent.venue}
-          onChange={handleChange}
+          onChange={(e) =>
+            setNewEvent({ ...newEvent, [e.target.name]: e.target.value })
+          }
           className="event-input"
         />
         <button className="add-event-button" onClick={handleAddEvent}>

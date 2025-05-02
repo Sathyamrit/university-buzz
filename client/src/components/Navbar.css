@@ -21,6 +21,7 @@
   display: flex;
   align-items: center;
   gap: 20px; /* Adds spacing between logo and links */
+  font-weight: 600;
 }
 
 .navbar-links {
@@ -44,7 +45,7 @@
 .nav-link {
   text-decoration: none;
   color: #333;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
 }
 
@@ -55,8 +56,8 @@
 .auth-link {
   text-decoration: none;
   color: #6c63ff;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .auth-link:hover {
@@ -66,8 +67,8 @@
 .profile-link {
   text-decoration: none;
   color: #333;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .profile-link:hover {
@@ -78,8 +79,8 @@
   background: none;
   border: none;
   color: #333;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
 }
 

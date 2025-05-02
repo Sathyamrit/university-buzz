@@ -49,15 +49,19 @@ export const Home = () => {
     return <p>Loading...</p>;
   }
 
+  // Construct the profile picture path dynamically
+  const profilePicturePath = `/images/profile/${user.name.replace(/\s+/g, " ")}.jpg`;
+
   return (
     <div className="home-container">
       {/* Left: Profile Box */}
       <div className="profile-box">
         <div className="profile-header">
           <img
-            src="https://placehold.co/100x100"
+            src={profilePicturePath}
             alt="Profile"
             className="profile-avatar"
+            onError={(e) => (e.target.src = "https://picsum.photos/100/100")} // Fallback if image is not found
           />
           <h3 className="profile-name">{user.name}</h3>
           <p className="profile-email">{user.email}</p>

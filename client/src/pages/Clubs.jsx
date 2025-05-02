@@ -105,11 +105,13 @@ export const Clubs = () => {
         ) : (
           clubs.map((club) => (
             <div key={club._id} className="club-card">
-              <img 
-                src="https://placehold.co/600x400"
-                alt={club.name} 
-                className="club-image" 
-                />
+              <img
+                src={`/images/clubs/${club.name
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")}.jpg`}
+                alt={club.name}
+                className="club-image"
+              />
               <div className="club-content">
                 <h3 className="club-name">{club.name}</h3>
                 <p className="club-description">{club.description}</p>

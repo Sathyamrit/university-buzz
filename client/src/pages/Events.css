@@ -19,7 +19,8 @@ body {
 /* Hero Section */
 .hero-section {
   width: 100%;
-  background-color: #f3e8ff; /* Light purple background */
+  /* background-color: #f3e8ff; Light purple background */
+  background: linear-gradient(to bottom, #eff6ff, #e8e4fd);
   border-radius: 12px;
   padding: 40px 20px; /* Increased padding for better spacing */
   text-align: center;
