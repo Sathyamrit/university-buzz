@@ -60,6 +60,7 @@
 
 .club-content {
   padding: 20px; /* Increased padding */
+  text-align: center;
 }
 
 .club-name {
@@ -74,42 +75,51 @@
   margin-bottom: 15px;
 }
 
+/* Center the tags */
 .club-tags {
   display: flex;
+  justify-content: center; /* Center horizontally */
   flex-wrap: wrap;
   gap: 8px; /* Increased gap */
   margin-bottom: 15px;
   font-weight: bold;
+  text-align: center;
 }
 
-.club-tag {
-  background: #f0f0f0;
-  color: #333;
-  font-size: 13px; /* Slightly larger font */
-  padding: 6px 12px; /* Increased padding */
-  border-radius: 20px;
-}
-
+/* Center the buttons */
 .club-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Center horizontally */
   align-items: center;
-  padding: 10px 20px; /* Added padding for spacing */
-  border-top: 1px solid #eee; /* Divider line */
+  gap: 8em; /* Add spacing between buttons */
+  padding: 10px 0;
 }
 
-.club-members {
+.view-club-button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
   font-size: 14px;
-  color: #777;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+}
+
+.view-club-button:hover {
+  background: #0056b3;
 }
 
 .join-club-button {
   background: #007bff;
   color: #fff;
   border: none;
-  padding: 10px 15px; /* Increased padding */
-  border-radius: 6px; /* Slightly more rounded */
+  padding: 10px 15px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
   transition: background 0.3s ease-in-out;
 }
 

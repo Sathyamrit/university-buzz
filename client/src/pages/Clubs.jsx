@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import "./Clubs.css";
 
 export const Clubs = () => {
   const [clubs, setClubs] = useState([]); // State to hold clubs data
   const [joinedClubs, setJoinedClubs] = useState([]); // State to hold joined clubs
   const [loading, setLoading] = useState(true); // State to handle loading
+  const navigate = useNavigate(); // Initialize useNavigate for navigation
 
   // Fetch clubs and joined clubs from the backend
   useEffect(() => {
@@ -83,6 +85,10 @@ export const Clubs = () => {
     }
   };
 
+  const handleViewClub = (clubId) => {
+    navigate(`/about?clubId=${clubId}`); // Redirect to the About page with the clubId as a query parameter
+  };
+
   if (loading) {
     return <p>Loading clubs...</p>; // Show loading message while fetching data
   }
@@ -123,7 +129,12 @@ export const Clubs = () => {
                   ))}
                 </div>
                 <div className="club-footer">
-                  <span className="club-members">👥 {club.members}</span>
+                  <button
+                    className="view-club-button"
+                    onClick={() => handleViewClub(club._id)}
+                  >
+                    Dive in
+                  </button>
                   <button
                     className="join-club-button"
                     onClick={() => handleJoinClub(club._id)}

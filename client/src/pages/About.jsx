@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom"; // Import useLocation to get query parameters
 import "./About.css";
 import Footer from "../components/Footer";
 
 export const About = () => {
   const [club, setClub] = useState(null); // State to hold club details
   const [events, setEvents] = useState([]); // State to hold events hosted by the club
+  const location = useLocation(); // Get the current location to extract query parameters
 
   useEffect(() => {
-    const loggedInClub = JSON.parse(localStorage.getItem("user"));
-    if (!loggedInClub || loggedInClub.type !== "club") {
-      console.error("User is not logged in as a club");
-      return;
+    // Extract the clubId from the query parameters
+    const queryParams = new URLSearchParams(location.search);
+    let clubId = queryParams.get("clubId");
+
+    // If no clubId is provided in the query parameters, check if the logged-in user is a club
+    if (!clubId) {
+      const loggedInUser = JSON.parse(localStorage.getItem("user"));
+      if (loggedInUser && loggedInUser.type === "club") {
+        clubId = loggedInUser._id; // Use the logged-in club's ID
+      } else {
+        console.error("No clubId provided and user is not logged in as a club");
+        return;
+      }
     }
 
-    const clubId = loggedInClub._id;
-
+    // Fetch club details
     const fetchClubDetails = async () => {
       try {
         const response = await fetch(`http://localhost:5000/api/clubs/${clubId}`);
@@ -29,6 +39,7 @@ export const About = () => {
       }
     };
 
+    // Fetch events hosted by the club
     const fetchClubEvents = async () => {
       try {
         const response = await fetch(`http://localhost:5000/api/events/${clubId}`);
@@ -45,7 +56,7 @@ export const About = () => {
 
     fetchClubDetails();
     fetchClubEvents();
-  }, []);
+  }, [location.search]); // Re-run the effect if the query parameters change
 
   if (!club) {
     return <p>Loading club details...</p>;
