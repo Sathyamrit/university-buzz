@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./About.css";
+import Footer from "../components/Footer";
 
 export const About = () => {
   const [club, setClub] = useState(null); // State to hold club details
@@ -148,9 +149,8 @@ export const About = () => {
       </div>
 
       {/* Footer Section */}
-      <div className="footer">
-        <p>We meet every Tuesday at 4:00 PM in the Computer Science Building, Room 105.</p>
-        <p>© 2025 UniversityBuzz. All rights reserved.</p>
+      <div className="about-footer">
+        <Footer />
       </div>
     </div>
   );
