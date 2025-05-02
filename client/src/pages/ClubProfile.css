@@ -1,11 +1,25 @@
+.backgroundColoring {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  /* background: linear-gradient(to bottom, #f9f9f9, #eaeaea); */
+  background: linear-gradient(to bottom, #eff6ff, #e8e4fd);
+}
+
 .club-profile-container {
-  max-width: 800px;
-  margin: 0 auto;
+  width: 80%;
+  max-width: 1450px; /* Center the profile container */
+  margin: 30px auto;
   padding: 20px;
+  background-color: #f9f9ff; /* Light purple background */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .club-profile-details {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -19,7 +33,7 @@
 }
 
 .add-event-section {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -37,13 +51,18 @@
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #ccc; /* Neutral gray border */
+  border-radius: 8px; /* Rounded corners */
   font-size: 14px;
+  background-color: #f9f9ff; /* Light purple background */
+  color: #333; /* Darker text color */
 }
 
-.event-textarea {
-  height: 80px;
+.event-input:focus,
+.event-textarea:focus {
+  outline: none;
+  border-color: #ccc; /* Keep the border neutral on focus */
+  box-shadow: none; /* Remove focus glow */
 }
 
 .add-event-button {
@@ -61,7 +80,7 @@
 }
 
 .events-section {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -79,7 +98,7 @@
 }
 
 .event-item {
-  background-color: #fff;
+  background-color: #f9f9ff;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -100,6 +119,15 @@
   background-color: #ff1a1a;
 }
 
+.add-post-section {
+  background-color: #ffffff; /* White background for add post section */
+  padding: 20px;
+  border-radius: 12px; /* Rounded corners */
+  margin-bottom: 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
 .delete-post-button,
 .delete-event-button {
   background-color: #ff4d4d;
@@ -114,4 +142,32 @@
 .delete-post-button:hover,
 .delete-event-button:hover {
   background-color: #ff1a1a;
+}
+
+.profile-details {
+  background-color: #ffffff; /* White background for profile details */
+  padding: 20px;
+  border-radius: 12px; /* Rounded corners */
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Space between profile picture and details */
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-info h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333; /* Darker text color */
+}
+
+.profile-info p {
+  font-size: 16px;
+  color: #555; /* Medium gray text */
+  margin: 5px 0;
 }

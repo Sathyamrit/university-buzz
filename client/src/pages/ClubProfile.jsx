@@ -91,9 +91,12 @@ export const ClubProfile = () => {
   // Handle deleting an event
   const handleDeleteEvent = async (eventId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/events/${eventId}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `http://localhost:5000/api/events/${eventId}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -143,9 +146,12 @@ export const ClubProfile = () => {
   // Handle deleting a post
   const handleDeletePost = async (postId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/posts/${postId}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `http://localhost:5000/api/posts/${postId}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -166,144 +172,147 @@ export const ClubProfile = () => {
   }
 
   return (
-    <div className="club-profile-container">
-      {/* Club Profile Section */}
-      <div className="club-profile-details">
-        <h2 className="club-profile-title">Club Profile</h2>
-        <p>
-          <strong>Name:</strong> {club.name}
-        </p>
-        <p>
-          <strong>Members:</strong> {club.members || "N/A"}
-        </p>
-        <p>
-          <strong>About:</strong> {club.description || "No description available."}
-        </p>
-      </div>
+    <div className="backgroundColoring">
+      <div className="club-profile-container">
+        {/* Club Profile Section */}
+        <div className="club-profile-details">
+          <h2 className="club-profile-title">Club Profile</h2>
+          <p>
+            <strong>Name:</strong> {club.name}
+          </p>
+          <p>
+            <strong>Members:</strong> {club.members || "N/A"}
+          </p>
+          <p>
+            <strong>About:</strong>{" "}
+            {club.description || "No description available."}
+          </p>
+        </div>
 
-      {/* Add Event Section */}
-      <div className="add-event-section">
-        <h3 className="add-event-title">Create an Event</h3>
-        <input
-          type="text"
-          name="name"
-          placeholder="Event Name"
-          value={newEvent.name}
-          onChange={(e) =>
-            setNewEvent({ ...newEvent, [e.target.name]: e.target.value })
-          }
-          className="event-input"
-        />
-        <textarea
-          name="about"
-          placeholder="About the Event"
-          value={newEvent.about}
-          onChange={(e) =>
-            setNewEvent({ ...newEvent, [e.target.name]: e.target.value })
-          }
-          className="event-textarea"
-        />
-        <input
-          type="date"
-          name="date"
-          value={newEvent.date}
-          onChange={(e) =>
-            setNewEvent({ ...newEvent, [e.target.name]: e.target.value })
-          }
-          className="event-input"
-        />
-        <input
-          type="time"
-          name="time"
-          value={newEvent.time}
-          onChange={(e) =>
-            setNewEvent({ ...newEvent, [e.target.name]: e.target.value })
-          }
-          className="event-input"
-        />
-        <input
-          type="text"
-          name="venue"
-          placeholder="Venue"
-          value={newEvent.venue}
-          onChange={(e) =>
-            setNewEvent({ ...newEvent, [e.target.name]: e.target.value })
-          }
-          className="event-input"
-        />
-        <button className="add-event-button" onClick={handleAddEvent}>
-          Add Event
-        </button>
-      </div>
+        {/* Add Event Section */}
+        <div className="add-event-section">
+          <h3 className="add-event-title">Create an Event</h3>
+          <input
+            type="text"
+            name="name"
+            placeholder="Event Name"
+            value={newEvent.name}
+            onChange={(e) =>
+              setNewEvent({ ...newEvent, [e.target.name]: e.target.value })
+            }
+            className="event-input"
+          />
+          <textarea
+            name="about"
+            placeholder="About the Event"
+            value={newEvent.about}
+            onChange={(e) =>
+              setNewEvent({ ...newEvent, [e.target.name]: e.target.value })
+            }
+            className="event-textarea"
+          />
+          <input
+            type="date"
+            name="date"
+            value={newEvent.date}
+            onChange={(e) =>
+              setNewEvent({ ...newEvent, [e.target.name]: e.target.value })
+            }
+            className="event-input"
+          />
+          <input
+            type="time"
+            name="time"
+            value={newEvent.time}
+            onChange={(e) =>
+              setNewEvent({ ...newEvent, [e.target.name]: e.target.value })
+            }
+            className="event-input"
+          />
+          <input
+            type="text"
+            name="venue"
+            placeholder="Venue"
+            value={newEvent.venue}
+            onChange={(e) =>
+              setNewEvent({ ...newEvent, [e.target.name]: e.target.value })
+            }
+            className="event-input"
+          />
+          <button className="add-event-button" onClick={handleAddEvent}>
+            Add Event
+          </button>
+        </div>
 
-      {/* Events Section */}
-      <div className="events-section">
-        <h3 className="events-title">Upcoming Events</h3>
-        {events.length === 0 ? (
-          <p className="no-events">No events created yet.</p>
-        ) : (
-          events.map((event) => (
-            <div key={event._id} className="event-item">
-              <p>
-                <strong>Event Name:</strong> {event.name}
-              </p>
-              <p>
-                <strong>About:</strong> {event.about}
-              </p>
-              <p>
-                <strong>Date:</strong> {event.date}
-              </p>
-              <p>
-                <strong>Time:</strong> {event.time}
-              </p>
-              <p>
-                <strong>Venue:</strong> {event.venue}
-              </p>
-              <button
-                className="delete-event-button"
-                onClick={() => handleDeleteEvent(event._id)}
-              >
-                Delete Event
-              </button>
-            </div>
-          ))
-        )}
-      </div>
+        {/* Events Section */}
+        <div className="events-section">
+          <h3 className="events-title">Upcoming Events</h3>
+          {events.length === 0 ? (
+            <p className="no-events">No events created yet.</p>
+          ) : (
+            events.map((event) => (
+              <div key={event._id} className="event-item">
+                <p>
+                  <strong>Event Name:</strong> {event.name}
+                </p>
+                <p>
+                  <strong>About:</strong> {event.about}
+                </p>
+                <p>
+                  <strong>Date:</strong> {event.date}
+                </p>
+                <p>
+                  <strong>Time:</strong> {event.time}
+                </p>
+                <p>
+                  <strong>Venue:</strong> {event.venue}
+                </p>
+                <button
+                  className="delete-event-button"
+                  onClick={() => handleDeleteEvent(event._id)}
+                >
+                  Delete Event
+                </button>
+              </div>
+            ))
+          )}
+        </div>
 
-      {/* Add Post Section */}
-      <div className="add-post-section">
-        <h3 className="add-post-title">Add a Post</h3>
-        <textarea
-          className="post-input"
-          placeholder="Write something..."
-          value={newPost}
-          onChange={(e) => setNewPost(e.target.value)}
-        />
-        <button className="add-post-button" onClick={handleAddPost}>
-          Add Post
-        </button>
-      </div>
+        {/* Add Post Section */}
+        <div className="add-post-section">
+          <h3 className="add-post-title">Add a Post</h3>
+          <textarea
+            className="post-input"
+            placeholder="Write something..."
+            value={newPost}
+            onChange={(e) => setNewPost(e.target.value)}
+          />
+          <button className="add-post-button" onClick={handleAddPost}>
+            Add Post
+          </button>
+        </div>
 
-      {/* Posts Section */}
-      <div className="posts-section">
-        <h3 className="posts-title">Your Posts</h3>
-        {posts.length === 0 ? (
-          <p className="no-posts">No posts added yet.</p>
-        ) : (
-          posts.map((post) => (
-            <div key={post._id} className="post-item">
-              <p>
-                <strong>Post:</strong> {post.content}
-              </p>
-              <button
-                className="delete-post-button"
-                onClick={() => handleDeletePost(post._id)}
-              >
-                Delete Post
-              </button>
-            </div>
-          ))
-        )}
+        {/* Posts Section */}
+        <div className="posts-section">
+          <h3 className="posts-title">Your Posts</h3>
+          {posts.length === 0 ? (
+            <p className="no-posts">No posts added yet.</p>
+          ) : (
+            posts.map((post) => (
+              <div key={post._id} className="post-item">
+                <p>
+                  <strong>Post:</strong> {post.content}
+                </p>
+                <button
+                  className="delete-post-button"
+                  onClick={() => handleDeletePost(post._id)}
+                >
+                  Delete Post
+                </button>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
