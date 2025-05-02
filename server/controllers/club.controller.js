@@ -2,7 +2,20 @@ import bcrypt from "bcrypt";
 import Club from "../models/club.model.js";
 
 export const createClub = async (req, res) => {
-  const { name, description, tags, members, image, password } = req.body;
+  const {
+    name,
+    description,
+    tags,
+    members,
+    image,
+    about,
+    tagline,
+    whatWeDo,
+    clubFounderName,
+    clubFounderBranch,
+    clubFounderTitle,
+    password,
+  } = req.body;
 
   if (!name || !password) {
     return res
@@ -29,6 +42,12 @@ export const createClub = async (req, res) => {
       tags,
       members,
       image,
+      about,
+      tagline,
+      whatWeDo,
+      clubFounderName,
+      clubFounderBranch,
+      clubFounderTitle,
       password: hashedPassword,
     });
 
@@ -97,3 +116,25 @@ export const loginClub = async (req, res) => {
       .json({ success: false, message: "Server error", error: error.message });
   }
 };
+
+export const updateClub = async (req, res) => {
+  const { id } = req.params;
+  const updatedData = req.body;
+
+  try {
+    const updatedClub = await Club.findByIdAndUpdate(id, updatedData, {
+      new: true, // Return the updated document
+      runValidators: true, // Ensure validation rules are applied
+    });
+
+    if (!updatedClub) {
+      return res.status(404).json({ success: false, message: "Club not found" });
+    }
+
+    res.status(200).json({ success: true, data: updatedClub });
+  } catch (error) {
+    console.error("Error updating club:", error.message);
+    res.status(500).json({ success: false, message: "Server error", error: error.message });
+  }
+};
+

@@ -20,6 +20,24 @@ const clubSchema = new mongoose.Schema(
     image: {
       type: String,
     },
+    about: {
+      type: String,
+    },
+    tagline: {
+      type: String,
+    },
+    whatWeDo: {
+      type: String,
+    },
+    clubFounderName: {
+      type: String,
+    },
+    clubFounderBranch: {
+      type: String,
+    },
+    clubFounderTitle: {
+      type: String,
+    },
     password: {
       type: String,
       required: true,

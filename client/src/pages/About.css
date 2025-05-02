@@ -1,31 +1,138 @@
-.about-container {
+.about-page {
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.header-section {
+  background-color: #f9f9ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  width: 60%;
+}
+
+.header-left {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.club-image {
+  width: 400px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.about-club-name {
+  font-size: 36px;
+  font-weight: bold;
+  color: #4b0082;
+}
+
+.club-tagline {
+  font-size: 18px;
+  margin-top: 10px;
+  color: #555;
+}
+
+.club-meta {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #777;
+}
+
+.club-tags {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tag {
+  background-color: #e8e4fd;
+  color: #4b0082;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.club-members {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.about-section,
+.what-we-do-section,
+.club-leadership-section,
+.events-section {
+  margin: 40px auto;
   max-width: 800px;
-  margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  background: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.about-title {
-  font-size: 28px;
+h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
   font-weight: bold;
-  margin-bottom: 10px;
   color: #333;
 }
 
-.about-description {
+p {
   font-size: 16px;
-  margin-bottom: 20px;
   color: #555;
+  line-height: 1.6;
 }
 
-.about-details p {
+.activities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.activity-card {
+  flex: 1 1 calc(33.333% - 15px);
+  background: #e8e4fd;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
   font-size: 14px;
-  margin: 5px 0;
-  color: #666;
 }
 
-.about-details strong {
-  color: #333;
+.club-leader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.leader-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+  color: #777;
 }
