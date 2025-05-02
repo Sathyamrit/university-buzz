@@ -32,7 +32,7 @@ app.use("/api/clubs", clubRoutes); // Register club routes
 
 // Server static files from the "public" directory and frontend
 app.get("/", (req, res) => {
-  res.sendFile("index.html", { root: "server/views" }); //send the index.html file when the root URL is accessed
+  res.sendFile("index.html", { root: "views" }); //send the index.html file when the root URL is accessed
 });
 
 // Start server
