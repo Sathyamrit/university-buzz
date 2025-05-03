@@ -43,10 +43,6 @@ app.use("/api/posts", postRoutes); //use the postRoutes for all requests to /api
 app.use("/api/events", eventRoutes); //use the eventRoutes for all requests to /api/events
 app.use("/api/clubs", clubRoutes); // Register club routes
 
-<<<<<<< HEAD
-// Server static files from the "public" directory and frontend
-=======
->>>>>>> deployment
 app.get("/", (req, res) => {
   res.sendFile("index.html", { root: "views" }); //send the index.html file when the root URL is accessed
 });
