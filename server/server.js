@@ -47,10 +47,10 @@ app.get("/", (req, res) => {
   res.sendFile("index.html", { root: "views" }); //send the index.html file when the root URL is accessed
 });
 
-
 // Start server
 const startServer = async () => {
   try {
+    const PORT = process.env.PORT || 5000;
     await connectDB(); //connect to the database
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server running on port ${PORT}`);
