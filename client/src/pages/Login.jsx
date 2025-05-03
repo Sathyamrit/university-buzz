@@ -16,6 +16,7 @@ export const Login = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  // console.log(`${import.meta.env.VITE.API_URI}`);
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -24,8 +25,8 @@ export const Login = () => {
     try {
       const endpoint =
         formData.type === "user"
-          ? "http://localhost:5000/api/profiles/login" // User login endpoint
-          : "http://localhost:5000/api/clubs/login"; // Club login endpoint
+          ? `${import.meta.env.VITE_API_URI}/api/profiles/login` // User login endpoint
+          : `${import.meta.env.VITE_API_URI}/api/clubs/login`; // Club login endpoint
 
       const response = await fetch(endpoint, {
         method: "POST",
@@ -35,6 +36,10 @@ export const Login = () => {
           password: formData.password,
         }),
       });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
       const data = await response.json();
       console.log("Response data:", data);

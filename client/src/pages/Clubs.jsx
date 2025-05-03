@@ -15,12 +15,12 @@ export const Clubs = () => {
 
       try {
         // Fetch all clubs
-        const clubsResponse = await fetch("http://localhost:5000/api/clubs");
+        const clubsResponse = await fetch(`${import.meta.env.VITE.API_URI}/api/clubs`);
         const clubsData = await clubsResponse.json();
 
         // Fetch joined clubs for the user
         const joinedClubsResponse = await fetch(
-          `http://localhost:5000/api/profiles/${user._id}/joined-clubs`
+          `${import.meta.env.VITE.API_URI}/api/profiles/${user._id}/joined-clubs`
         );
         const joinedClubsData = await joinedClubsResponse.json();
 
@@ -52,7 +52,7 @@ export const Clubs = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/profiles/join-club",
+        `${import.meta.env.VITE.API_URI}/api/profiles/join-club`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
