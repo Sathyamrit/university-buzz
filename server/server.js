@@ -47,13 +47,14 @@ app.get("/", (req, res) => {
   res.sendFile("index.html", { root: "views" }); //send the index.html file when the root URL is accessed
 });
 
+
 // Start server
 const startServer = async () => {
   try {
     await connectDB(); //connect to the database
-    app.listen(process.env.PORT || 5000, () => {
-      console.log(`Server is running on port ${process.env.PORT || 5000}`);
-      console.log("click http://localhost:5000 to visit the server");
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`Server running on port ${PORT}`);
+      console.log(`Visit http://localhost:${PORT}`);
     });
   } catch (error) {
     console.error("Error starting server:", error.message);
@@ -61,3 +62,4 @@ const startServer = async () => {
 };
 
 startServer();
+
