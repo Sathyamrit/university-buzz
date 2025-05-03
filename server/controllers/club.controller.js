@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import Club from "../models/club.model.js";
 
 export const createClub = async (req, res) => {

@@ -31,7 +31,7 @@ export const ClubProfile = () => {
     const fetchEvents = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/events/${club._id}`
+          `${import.meta.env.VITE.API_URI}/api/events/${club._id}`
         );
         const data = await response.json();
         if (data.success) {
@@ -45,7 +45,7 @@ export const ClubProfile = () => {
     const fetchPosts = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/posts/club/${club._id}`
+          `${import.meta.env.VITE.API_URI}/api/posts/club/${club._id}`
         );
         const data = await response.json();
         if (data.success) {
@@ -92,7 +92,7 @@ export const ClubProfile = () => {
   const handleDeleteEvent = async (eventId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/events/${eventId}`,
+        `${import.meta.env.VITE.API_URI}/events/${eventId}`,
         {
           method: "DELETE",
         }
@@ -147,7 +147,7 @@ export const ClubProfile = () => {
   const handleDeletePost = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/posts/${postId}`,
+        `http://:5000/api/posts/${postId}`,
         {
           method: "DELETE",
         }
