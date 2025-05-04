@@ -14,7 +14,7 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:3000", // Local development
   "https://university-buzz.vercel.app", // Vercel frontend
-  "https://university-buzz-production.up.railway.app", // Railway backend
+  "https://university-buzz.up.railway.app", // Railway backend
 ];
 
 const corsOptions = {
