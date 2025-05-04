@@ -5,7 +5,7 @@ export const Profile = () => {
   const [user, setUser] = useState(null); // State to hold user data
   const [posts, setPosts] = useState([]); // State to hold posts
   const [newPost, setNewPost] = useState(""); // State to hold new post content
-
+  const apiUrl = import.meta.env.VITE_API_URI;
   // Retrieve user data from localStorage
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem("user"));
@@ -22,9 +22,7 @@ export const Profile = () => {
 
     const fetchPosts = async () => {
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE.API_URI}/posts?email=${user.email}`
-        );
+        const response = await fetch(`${apiUrl}/posts?email=${user.email}`);
         const data = await response.json();
         if (data.success) {
           setPosts(data.data);
@@ -43,9 +41,7 @@ export const Profile = () => {
       const user = JSON.parse(localStorage.getItem("user"));
 
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE.API_URI}/api/profiles/${user._id}/joined-clubs`
-        );
+        const response = await fetch(`${apiUrl}/api/profiles/${user._id}/joined-clubs`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -75,7 +71,7 @@ export const Profile = () => {
     const user = JSON.parse(localStorage.getItem("user")); // Retrieve user data from localStorage
 
     try {
-      const response = await fetch("http://localhost:5000/api/posts", {
+      const response = await fetch(`${apiUrl}/api/posts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -103,7 +99,7 @@ export const Profile = () => {
   // Handle deleting a post
   const handleDeletePost = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/posts/${id}`, {
+      const response = await fetch(`${apiUrl}/api/posts/${id}`, {
         method: "DELETE",
       });
 
